@@ -93,26 +93,45 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Row(
                   children: <Widget>[
                     Expanded(
-                      flex: 2, // 20% of the space
-                      child: Image.network(
-                        'images/prayer',
-                        fit: BoxFit.cover,  // Cover the area of the widget
-                      ),
+                        flex: 5, // 20% of the space
+                        child: SizedBox()
                     ),
                     Expanded(
-                      flex: 8, // 80% of the space
-                      child: Container(
-                        padding: EdgeInsets.all(10),  // Optional padding
-                        color: Colors.blue[100],  // Optional background color
-                        child: Text(
-                          'Here is some text that fills 80% of the row. This text can wrap over multiple lines as needed.',
-                          style: TextStyle(fontSize: 12),
-                        ),
+                      flex: 20, // 20% of the space
+                      child: Image.asset('images/prayer.png')
+                    ),
+                    Expanded(
+                      flex: 5, // 20% of the space
+                      child: SizedBox()
+                    ),
+                    Expanded(
+                      flex: 60, // 80% of the space
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center, // Center the Column contents vertically
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Alphabetical Quran',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 16,color: fontGold),
+                          ),
+                          Text(
+                            'Explore &amp; Search Quran Arranged Alphabetically By Topics of Interest.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 12,color: fontGold),
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
               ),
+              SizedBox(
+                height: 1,
+                child: Container(
+                  color: fontGold,
+                ),
+              ),
               IntrinsicHeight(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -125,12 +144,12 @@ class _MyHomePageState extends State<MyHomePage> {
                         print('Button Pressed!');
                       },
                     ),
-                    SizedBox(width: 40),
+                    SizedBox(width: 70),
                     Container(
                       width: 1,
                       color: Color(0xFFFFDE93),
                     ),
-                    SizedBox(width: 40),
+                    SizedBox(width: 70),
                     ImageTextButton(
                       imagePath: 'images/qbook.png',
                       // Update with your image path
@@ -155,21 +174,21 @@ class _MyHomePageState extends State<MyHomePage> {
                     ImageTextButton(
                       imagePath: 'images/qbook.png',
                       // Update with your image path
-                      buttonText: 'Arabic Quran',
+                      buttonText: 'Urdu Quran',
                       onTap: () {
                         print('Button Pressed!');
                       },
                     ),
-                    SizedBox(width: 40),
+                    SizedBox(width: 73),
                     Container(
                       width: 1,
                       color: Color(0xFFFFDE93),
                     ),
-                    SizedBox(width: 40),
+                    SizedBox(width: 70),
                     ImageTextButton(
                       imagePath: 'images/qbook.png',
                       // Update with your image path
-                      buttonText: 'English Quran',
+                      buttonText: 'About Quran',
                       onTap: () {
                         print('Button Pressed!');
                       },
@@ -183,26 +202,48 @@ class _MyHomePageState extends State<MyHomePage> {
                   color: fontGold,
                 ),
               ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.facebook),
-                    onPressed: () {},
-                  ),
-                  // IconButton(
-                  //   icon: Icon(Icons.instagram),
-                  //   onPressed: () {},
-                  // ),
-                ],
+              IntrinsicHeight(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    ImageTextButton2(
+                      imagePath: 'images/facebook.png',
+                      // Update with your image path
+                      buttonText: 'Facebook',
+                      onTap: () {
+                        print('Button Pressed!');
+                      },
+                    ),
+                    SizedBox(width: 70),
+                    Container(
+                      width: 1,
+                      color: Color(0xFFFFDE93),
+                    ),
+                    SizedBox(width: 73
+                    ),
+                    ImageTextButton2(
+                      imagePath: 'images/instagram.png',
+                      // Update with your image path
+                      buttonText: 'Instagram',
+                      onTap: () {
+                        print('Button Pressed!');
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 1,
+                child: Container(
+                  color: fontGold,
+                ),
               ),
               SizedBox(height: 20),
               Center(
                 child: Text(
                   'Created By Syed Ammar Shah (author@jsdol.org)\nDeveloped by Teniqs.com',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 12),
+                  style: TextStyle(fontSize: 12,color: fontGold),
                 ),
               ),
             ],
@@ -233,12 +274,11 @@ class ImageTextButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Column(
-        mainAxisSize: MainAxisSize.min, // Use minimum space necessary
         children: <Widget>[
           Image.asset(
             imagePath,
-            width: 150, // Specify your image width
-            height: 150, // Specify your image height
+            width: 50, // Specify your image width
+            height: 50, // Specify your image height
             fit: BoxFit.cover, // Cover the given space
           ),
           SizedBox(height: 2),
@@ -252,11 +292,61 @@ class ImageTextButton extends StatelessWidget {
           Text(
             buttonText,
             style: TextStyle(
-                fontSize: 20, // Font size for the text
-                fontWeight: FontWeight.bold,
+                fontSize: 14, // Font size for the text
                 color: fontGold // Font weight
                 ),
           ),
+          SizedBox(height: 5),
+        ],
+      ),
+    );
+  }
+}
+
+class ImageTextButton2 extends StatelessWidget {
+  final String imagePath;
+  final String buttonText;
+  final VoidCallback onTap;
+
+  Color background = Color(0xFF003F38);
+  Color fontGold = Color(0xFFFFDE93);
+
+  ImageTextButton2({
+    Key? key,
+    required this.imagePath,
+    required this.buttonText,
+    required this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        children: <Widget>[
+          SizedBox(height: 10),
+          Image.asset(
+            imagePath,
+            width: 40, // Specify your image width
+            height: 40, // Specify your image height
+            fit: BoxFit.cover, // Cover the given space
+          ),
+          SizedBox(height: 5),
+          SizedBox(
+            height: 2,
+            child: Container(
+              color: fontGold,
+            ),
+          ),
+          // Space between image and text
+          Text(
+            buttonText,
+            style: TextStyle(
+                fontSize: 14, // Font size for the text
+                color: fontGold // Font weight
+            ),
+          ),
+          SizedBox(height: 5),
         ],
       ),
     );
