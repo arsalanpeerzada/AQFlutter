@@ -1,5 +1,9 @@
+import 'package:alphabeticalquran/alphaquran.dart';
 import 'package:alphabeticalquran/splach_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert'; // for using json.decode
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,6 +37,31 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String apiData = "";
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  void loadData() async {
+    try {
+      var data = await fetchDateConversion();
+      setState(() {
+        apiData = data;
+        isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+        // Optionally, handle the error more gracefully and inform the user
+        print('Failed to fetch data: $e');
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Color background = Color(0xFF003F38);
@@ -46,9 +75,12 @@ class _MyHomePageState extends State<MyHomePage> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
+              Padding(padding:
+              EdgeInsets.only(top: MediaQuery.of(context).padding.top)),
               Container(
                 width: double.infinity,
                 height: 250,
+                margin: EdgeInsets.only(bottom: 30),
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage("images/headeredit.png"),
@@ -56,11 +88,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         .cover, // This ensures the image covers the screen
                   ),
                 ),
-                child: Container(
-                  margin: EdgeInsets.only(bottom: 20.0),
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Text(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
                       "Alphabetical Quran",
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -68,7 +99,22 @@ class _MyHomePageState extends State<MyHomePage> {
                           color: fontGold,
                           fontWeight: FontWeight.bold),
                     ),
-                  ),
+                    Center(
+
+                      child: FutureBuilder<String>(
+                        future: fetchDateConversion(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return CircularProgressIndicator();
+                          } else if (snapshot.hasError) {
+                            return Text('Error: ${snapshot.error}');
+                          } else {
+                            return Text('${snapshot.data}',style: TextStyle(color: fontGold),);
+                          }
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Container(
@@ -94,31 +140,29 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: <Widget>[
                     Expanded(
                         flex: 5, // 20% of the space
-                        child: SizedBox()
-                    ),
+                        child: SizedBox()),
                     Expanded(
-                      flex: 20, // 20% of the space
-                      child: Image.asset('images/prayer.png')
-                    ),
+                        flex: 20, // 20% of the space
+                        child: Image.asset('images/prayer.png')),
                     Expanded(
-                      flex: 5, // 20% of the space
-                      child: SizedBox()
-                    ),
+                        flex: 5, // 20% of the space
+                        child: SizedBox()),
                     Expanded(
                       flex: 60, // 80% of the space
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center, // Center the Column contents vertically
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        // Center the Column contents vertically
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
                             'Alphabetical Quran',
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 16,color: fontGold),
+                            style: TextStyle(fontSize: 16, color: fontGold),
                           ),
                           Text(
                             'Explore &amp; Search Quran Arranged Alphabetically By Topics of Interest.',
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 12,color: fontGold),
+                            style: TextStyle(fontSize: 12, color: fontGold),
                           ),
                         ],
                       ),
@@ -141,7 +185,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       // Update with your image path
                       buttonText: 'Arabic Quran',
                       onTap: () {
-                        print('Button Pressed!');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => AlphaQuran()),
+                        );
                       },
                     ),
                     SizedBox(width: 70),
@@ -219,8 +266,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       width: 1,
                       color: Color(0xFFFFDE93),
                     ),
-                    SizedBox(width: 73
-                    ),
+                    SizedBox(width: 73),
                     ImageTextButton2(
                       imagePath: 'images/instagram.png',
                       // Update with your image path
@@ -243,7 +289,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text(
                   'Created By Syed Ammar Shah (author@jsdol.org)\nDeveloped by Teniqs.com',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 12,color: fontGold),
+                  style: TextStyle(fontSize: 12, color: fontGold),
                 ),
               ),
             ],
@@ -344,11 +390,49 @@ class ImageTextButton2 extends StatelessWidget {
             style: TextStyle(
                 fontSize: 14, // Font size for the text
                 color: fontGold // Font weight
-            ),
+                ),
           ),
           SizedBox(height: 5),
         ],
       ),
     );
   }
+}
+
+Future<String> fetchDateConversion() async {
+  // URL of the API
+  String date = getCurrentDate();
+  String url = 'http://api.aladhan.com/v1/gToH/$date';
+
+  try {
+    // Making GET request
+    http.Response response = await http.get(Uri.parse(url));
+
+    // Checking if the request was successful
+    if (response.statusCode == 200) {
+      // Decode the JSON data
+      var jsonResponse = jsonDecode(response.body);
+      // Navigate through the map to get the month in English from Gregorian part
+      String monthEn = jsonResponse['data']['hijri']['month']['en'];
+      String day = jsonResponse['data']['hijri']['day'];
+      String year = jsonResponse['data']['hijri']['year'];
+      String date = "$day, $monthEn, $year AH";
+
+      return date;
+    } else {
+      // Handle the case when the server does not return a 200 OK response
+      print('Request failed with status: ${response.statusCode}.');
+      throw Exception('Failed to load data');
+    }
+  } catch (e) {
+    // Handling exceptions by throwing them
+    print('Caught error: $e');
+    throw Exception('Failed to load data due to an error: $e');
+  }
+}
+
+String getCurrentDate() {
+  DateTime now = DateTime.now();
+  DateFormat formatter = DateFormat('dd-MM-yyyy');
+  return formatter.format(now);
 }
