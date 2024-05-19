@@ -64,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    Color background = Color(0xFF003F38);
+    Color background = Color(0xFF003D35);
     Color fontGold = Color(0xFFFFDE93);
 
     return Scaffold(
@@ -136,40 +136,53 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               IntrinsicHeight(
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                        flex: 5, // 20% of the space
-                        child: SizedBox()),
-                    Expanded(
-                        flex: 20, // 20% of the space
-                        child: Image.asset('images/prayer.png')),
-                    Expanded(
-                        flex: 5, // 20% of the space
-                        child: SizedBox()),
-                    Expanded(
-                      flex: 60, // 80% of the space
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        // Center the Column contents vertically
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Alphabetical Quran',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 16, color: fontGold),
-                          ),
-                          Text(
-                            'Explore &amp; Search Quran Arranged Alphabetically By Topics of Interest.',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 12, color: fontGold),
-                          ),
-                        ],
+                child: InkWell(
+                  onTap: () {
+                    // Define the action to perform when the widget is clicked
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AlphaQuran()),
+                    );
+                  },
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                          flex: 5, // 20% of the space
+                          child: SizedBox()),
+                      Expanded(
+                          flex: 20, // 20% of the space
+                          child: Image.asset('images/prayer.png')),
+                      Expanded(
+                          flex: 5, // 20% of the space
+                          child: SizedBox()),
+                      Expanded(
+                        flex: 60, // 80% of the space
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          // Center the Column contents vertically
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Alphabetical Quran',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 16, color: fontGold),
+                            ),
+                            Text(
+                              'Explore & Search Quran Arranged Alphabetically By Topics of Interest.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 12, color: fontGold),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                      Expanded(
+                          flex: 5, // 20% of the space
+                          child: SizedBox()),
+                    ],
+                  ),
                 ),
               ),
+
               SizedBox(
                 height: 1,
                 child: Container(
