@@ -1,6 +1,6 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
+
+import 'Utils/FileReaderClass.dart';
 
 class AlphaQuran extends StatefulWidget {
   const AlphaQuran({super.key});
@@ -16,13 +16,51 @@ class _AlphaQuranState extends State<AlphaQuran> {
 
 
   // Sample data for the list
-  Map<String, String> chapters = {
-    "1": "The Opening",
-    "2": "The Cow",
-    "3": "The Family of Imran",
-    // Add more chapters or verses as needed
-  };
+  // Map<String, String> chapters = {
+  //   "1": "The Opening",
+  //   "2": "The Cow",
+  //   "3": "The Family of Imran",
+  //   // Add more chapters or verses as needed
+  // };
 
+  late Map<String, String> chapters;
+  late FileReaderClass fileReaderClass;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    chapters = {};
+    fileReaderClass = FileReaderClass();
+    readFileAndProcess();
+  }
+
+  Future<void> readFileAndProcess() async {
+    List<String> data;
+    try {
+      data = await fileReaderClass.readFile('topics.txt');
+
+      for (int i = 0; i < data.length; i++) {
+          try {
+            List<String> titles = data[i].split(':');
+            if (titles.length == 2) {
+              String num = (i + 1).toString();
+              chapters[num] = titles[0];
+            } else {
+              chapters[''] = ' ';
+            }
+          } catch (e) {
+            print('Error: $e');
+            chapters[''] = ' ';
+          }
+
+      }
+
+      setState(() {});
+    } catch (e) {
+      print('Error reading file: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,20 +114,30 @@ class _AlphaQuranState extends State<AlphaQuran> {
     String chapterName = chapter.keys.first;
     String description = chapter.values.first;
 
-    return Container(
-      color: white,
-      padding: EdgeInsets.all(8), // Added padding for better UI
-      child: Row(
-        children: [
-          SizedBox(width: 10),
-          Text(chapterName, style: TextStyle(color: Colors.black, fontSize: 18)),
-          SizedBox(width: 10),
-          Expanded(
-            child: Text(description, style: TextStyle(color: Colors.grey, fontSize: 14)), // Optional: display description
+    return Column(
+      children: [
+        Container(
+          color: white,
+          padding: EdgeInsets.all(8), // Added padding for better UI
+          child: Row(
+            children: [
+              SizedBox(width: 10),
+              Text(chapterName, style: TextStyle(color: Colors.black, fontSize: 16)),
+              SizedBox(width: 10),
+              Expanded(
+                child: Text(description, style: TextStyle(color: Colors.black, fontSize: 14)), // Optional: display description
+              ),
+              Icon(Icons.book, color: fontGold, size: 30),
+            ],
           ),
-          Icon(Icons.book, color: fontGold, size: 30),
-        ],
-      ),
+        ),
+        SizedBox(
+          height: 1,
+          child: Container(
+            color: Colors.black,
+          ),
+        ),
+      ],
     );
   }
 }

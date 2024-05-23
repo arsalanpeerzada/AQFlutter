@@ -198,10 +198,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       // Update with your image path
                       buttonText: 'Arabic Quran',
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => AlphaQuran()),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(builder: (context) => AlphaQuran()),
+                        // );
                       },
                     ),
                     SizedBox(width: 70),
