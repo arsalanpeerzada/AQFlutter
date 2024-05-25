@@ -1,4 +1,5 @@
 import 'package:alphabeticalquran/alphaquran.dart';
+import 'package:alphabeticalquran/englishquran.dart';
 import 'package:alphabeticalquran/splach_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -141,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     // Define the action to perform when the widget is clicked
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AlphaQuran()),
+                      MaterialPageRoute(builder: (context) => const AlphaQuran()),
                     );
                   },
                   child: Row(
@@ -198,10 +199,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       // Update with your image path
                       buttonText: 'Arabic Quran',
                       onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(builder: (context) => AlphaQuran()),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const EnglishQuran()),
+                        );
                       },
                     ),
                     SizedBox(width: 70),
@@ -215,7 +216,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       // Update with your image path
                       buttonText: 'English Quran',
                       onTap: () {
-                        print('Button Pressed!');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const EnglishQuran()),
+                        );
                       },
                     ),
                   ],
@@ -236,7 +240,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       // Update with your image path
                       buttonText: 'Urdu Quran',
                       onTap: () {
-                        print('Button Pressed!');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const EnglishQuran()),
+                        );
                       },
                     ),
                     SizedBox(width: 73),
