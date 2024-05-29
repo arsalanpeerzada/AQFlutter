@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'englishquranverse.dart';
+
 class EnglishQuran extends StatefulWidget {
   const EnglishQuran({super.key});
 
@@ -102,44 +104,56 @@ class _AlphaQuranState extends State<EnglishQuran> {
   Widget _buildCustomListItem(chapter) {
     // Assuming the map has only one entry: {'chapterName': 'description'}
     dynamic chapterss = chapter[7];
+    int chapteriid = chapter['id'];
     String chapterId = chapter['id'].toString();
     String ChapterName = chapter['name_simple'];
     String ArabicName = chapter['name_arabic'];
     String desc = chapter['translated_name']['name'];
 
-    return Column(
-      children: [
-        Container(
-          color: white,
-          padding: EdgeInsets.all(8), // Added padding for better UI
-          child: Row(
-            children: [
-              SizedBox(width: 10),
-              Text(chapterId, style: TextStyle(color: Colors.black, fontSize: 16)),
-              SizedBox(width: 10),
-              Expanded(
-                child: Text(ChapterName, style: TextStyle(color: Colors.black, fontSize: 16)), // Optional: display description
-              ),
-              Text(ArabicName, style: TextStyle(color: Colors.black, fontSize: 16)),
-            ],
+    return InkWell(
+      onTap: () {
+        // Navigate to the next page and pass the chapterId
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => EnglishQuranVerses(chapterId: chapteriid),
           ),
-        ),
-        Row(
-          children: [
-            SizedBox(width: 35),
-            Text(desc, style: TextStyle(color: Colors.grey, fontSize: 12)),
-          ],
-        ),
-        Container(
-          padding: EdgeInsets.only(top: 5),
-          child: SizedBox(
-            height: 1,
-            child: Container(
-              color: Colors.black,
+        );
+      },
+      child: Column(
+        children: [
+          Container(
+            color: white,
+            padding: EdgeInsets.all(8), // Added padding for better UI
+            child: Row(
+              children: [
+                SizedBox(width: 10),
+                Text(chapterId, style: TextStyle(color: Colors.black, fontSize: 16)),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Text(ChapterName, style: TextStyle(color: Colors.black, fontSize: 16)), // Optional: display description
+                ),
+                Text(ArabicName, style: TextStyle(color: Colors.black, fontSize: 16)),
+              ],
             ),
           ),
-        ),
-      ],
+          Row(
+            children: [
+              SizedBox(width: 35),
+              Text(desc, style: TextStyle(color: Colors.grey, fontSize: 12)),
+            ],
+          ),
+          Container(
+            padding: EdgeInsets.only(top: 5),
+            child: SizedBox(
+              height: 1,
+              child: Container(
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
