@@ -5,8 +5,9 @@ import 'Remote/ApiService.dart';
 
 class EnglishQuranVerses extends StatefulWidget {
   final int chapterId;
+  final String chapterName;
 
-  const EnglishQuranVerses({super.key, required this.chapterId});
+  const EnglishQuranVerses({super.key, required this.chapterId,required this.chapterName});
 
   @override
   State<EnglishQuranVerses> createState() => _EnglishQuranVersesState();
@@ -28,7 +29,7 @@ class _EnglishQuranVersesState extends State<EnglishQuranVerses> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Quran Chapter ${widget.chapterId}'),
+        title: Text('Surah ${widget.chapterName}'),
       ),
       body: FutureBuilder<VerseChapterModel>(
         future: futureChapter,

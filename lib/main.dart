@@ -1,6 +1,8 @@
 import 'package:alphabeticalquran/alphaquran.dart';
+import 'package:alphabeticalquran/arabicquran.dart';
 import 'package:alphabeticalquran/englishquran.dart';
 import 'package:alphabeticalquran/splach_screen.dart';
+import 'package:alphabeticalquran/urduquran.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert'; // for using json.decode
@@ -201,7 +203,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const EnglishQuran()),
+                          MaterialPageRoute(builder: (context) => const ArabicQuran()),
                         );
                       },
                     ),
@@ -242,7 +244,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const EnglishQuran()),
+                          MaterialPageRoute(builder: (context) => const UrduQuran()),
                         );
                       },
                     ),

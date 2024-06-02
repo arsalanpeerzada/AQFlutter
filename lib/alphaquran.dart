@@ -1,3 +1,4 @@
+import 'package:alphabeticalquran/alphaquranverse.dart';
 import 'package:flutter/material.dart';
 
 import 'Utils/FileReaderClass.dart';
@@ -24,6 +25,7 @@ class _AlphaQuranState extends State<AlphaQuran> {
   // };
 
   late Map<String, String> chapters;
+
   late FileReaderClass fileReaderClass;
 
   @override
@@ -42,13 +44,9 @@ class _AlphaQuranState extends State<AlphaQuran> {
 
       for (int i = 0; i < data.length; i++) {
           try {
-            List<String> titles = data[i].split(':');
-            if (titles.length == 2) {
               String num = (i + 1).toString();
-              chapters[num] = titles[0];
-            } else {
-              chapters[''] = ' ';
-            }
+              chapters[num] = data[i];
+
           } catch (e) {
             print('Error: $e');
             chapters[''] = ' ';
@@ -114,30 +112,45 @@ class _AlphaQuranState extends State<AlphaQuran> {
     String chapterName = chapter.keys.first;
     String description = chapter.values.first;
 
-    return Column(
-      children: [
-        Container(
-          color: white,
-          padding: EdgeInsets.all(8), // Added padding for better UI
-          child: Row(
-            children: [
-              SizedBox(width: 10),
-              Text(chapterName, style: TextStyle(color: Colors.black, fontSize: 16)),
-              SizedBox(width: 10),
-              Expanded(
-                child: Text(description, style: TextStyle(color: Colors.black, fontSize: 14)), // Optional: display description
-              ),
-              Icon(Icons.book, color: fontGold, size: 30),
-            ],
+    List<String> titles = description.split(':');
+    String _TopicName = titles[0];
+    String lines = titles[1];
+    String TopicName = _TopicName.replaceAll('_', ' ');
+    return InkWell(
+      onTap: () {
+        // Navigate to the next page and pass the chapterId
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => AlphaQuranVerse(chapterId: chapterName,chapterName:TopicName, chapterLines: lines,),
           ),
-        ),
-        SizedBox(
-          height: 1,
-          child: Container(
-            color: Colors.black,
+        );
+      },
+      child: Column(
+        children: [
+          Container(
+            color: white,
+            padding: EdgeInsets.all(8), // Added padding for better UI
+            child: Row(
+              children: [
+                SizedBox(width: 10),
+                Text(chapterName, style: TextStyle(color: Colors.black, fontSize: 16)),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Text(TopicName, style: TextStyle(color: Colors.black, fontSize: 14)), // Optional: display description
+                ),
+                Icon(Icons.book, color: fontGold, size: 30),
+              ],
+            ),
           ),
-        ),
-      ],
+          SizedBox(
+            height: 1,
+            child: Container(
+              color: Colors.black,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

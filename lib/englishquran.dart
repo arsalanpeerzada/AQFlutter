@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
 import 'englishquranverse.dart';
@@ -116,19 +117,24 @@ class _AlphaQuranState extends State<EnglishQuran> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => EnglishQuranVerses(chapterId: chapteriid),
+            builder: (context) => EnglishQuranVerses(chapterId: chapteriid,chapterName:ChapterName),
           ),
         );
       },
       child: Column(
         children: [
+          SizedBox(
+            height: 10,
+          ),
           Container(
             color: white,
-            padding: EdgeInsets.all(8), // Added padding for better UI
+            padding: EdgeInsets.symmetric(vertical: 0.0,horizontal: 8.0), // Added padding for better UI
             child: Row(
               children: [
-                SizedBox(width: 10),
-                Text(chapterId, style: TextStyle(color: Colors.black, fontSize: 16)),
+                SizedBox(width: 5),
+                SizedBox(
+                    width: 30,
+                    child: Text(chapterId, style: TextStyle(color: Colors.black, fontSize: 16))),
                 SizedBox(width: 10),
                 Expanded(
                   child: Text(ChapterName, style: TextStyle(color: Colors.black, fontSize: 16)), // Optional: display description
@@ -137,9 +143,12 @@ class _AlphaQuranState extends State<EnglishQuran> {
               ],
             ),
           ),
+          SizedBox(
+            height: 5,
+          ),
           Row(
             children: [
-              SizedBox(width: 35),
+              SizedBox(width: 55),
               Text(desc, style: TextStyle(color: Colors.grey, fontSize: 12)),
             ],
           ),
