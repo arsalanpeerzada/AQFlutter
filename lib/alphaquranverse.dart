@@ -30,12 +30,14 @@ class _AlphaQuranVerseState extends State<AlphaQuranVerse> {
     chapters = {};
     fileReaderClass = FileReaderClass();
 
-    extractVerses(data, topicName, lines);
+    String topicName = widget.chapterName;
+    int  lines = int.parse(widget.chapterLines);
+    extractVerses(topicName, lines);
   }
 
-  List<ModelPage> extractVerses(List<String> data, String topicName, int lines) {
+  Future<List<ModelPage>> extractVerses(String topicName, int lines) async {
     List<ModelPage> modelPageList = [];
-
+    List<String> data = await fileReaderClass.readFile('topics.txt');
     for (int i = 0; i < data.length; i++) {
       String formattedTopicName = topicName.replaceAll('_', ' ');
       if (data[i] == formattedTopicName) {
