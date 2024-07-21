@@ -122,7 +122,7 @@ class _AlphaQuranState extends State<AlphaQuran> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => AlphaQuranVerse(chapterId: chapterName,chapterName:TopicName, chapterLines: lines,),
+            builder: (context) => AlphaQuranVerse(chapterId: chapterName,chapterName:_TopicName, chapterLines: lines,),
           ),
         );
       },

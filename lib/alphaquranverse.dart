@@ -32,24 +32,29 @@ class _AlphaQuranVerseState extends State<AlphaQuranVerse> {
 
     String topicName = widget.chapterName;
     int  lines = int.parse(widget.chapterLines);
-    extractVerses(topicName, lines);
+    extractVerses(topicName, lines).then((value) {
+      setState(() {
+        modelPageList = value;
+      });
+    });
+
   }
 
   Future<List<ModelPage>> extractVerses(String topicName, int lines) async {
     List<ModelPage> modelPageList = [];
-    List<String> data = await fileReaderClass.readFile('topics.txt');
+    List<String> data = await fileReaderClass.readFile('topicverse.txt');
     for (int i = 0; i < data.length; i++) {
-      String formattedTopicName = topicName.replaceAll('_', ' ');
-      if (data[i] == formattedTopicName) {
+      String formattedTopicName = topicName;
+      if (data[i].contains(formattedTopicName)) {
         for (int k = 1; k <= lines; k++) {
           ModelPage modelPage = ModelPage(verse: "", verseID: "");
           try {
             String verseData = data[i + k];
             if (verseData.isNotEmpty) {
-              List<String> Titles = verseData.split(RegExp(r'[\[\]]'));
-              if (Titles.length > 1) {
-                modelPage.verse = Titles[2];
-                modelPage.verseID = Titles[1];
+              List<String> titles = verseData.split(RegExp(r'[\[\]]'));
+              if (titles.length > 1) {
+                modelPage.verse = titles[2];
+                modelPage.verseID = titles[1];
               }
             }
           } catch (e) {
@@ -97,13 +102,13 @@ class _AlphaQuranVerseState extends State<AlphaQuranVerse> {
                 ],
               ),
             ),
-            Container(
-              child: Expanded(// Use Expanded to fill the remaining space
-                child: ListView(
-                  children: chapters.entries.map((entry) {
-                    return _buildCustomListItem({entry.key: entry.value});
-                  }).toList(),
-                ),
+            Expanded(// Use Expanded to fill the remaining space
+              child: ListView.builder(
+                itemCount: modelPageList.length,
+                itemBuilder: (context, index) {
+                  ModelPage modelPage = modelPageList[index];
+                  return _buildCustomListItem(modelPage);
+                },
               ),
             ),
           ],
@@ -112,25 +117,21 @@ class _AlphaQuranVerseState extends State<AlphaQuranVerse> {
     );
   }
 
-  Widget _buildCustomListItem(Map<String, String> chapter) {
-    // Assuming the map has only one entry: {'chapterName': 'description'}
-    String chapterName = chapter.keys.first;
-    String description = chapter.values.first;
-
+  Widget _buildCustomListItem(ModelPage modelPage) {
     return Column(
       children: [
         Container(
-          color: white,
+          color: Colors.white,
           padding: EdgeInsets.all(8), // Added padding for better UI
           child: Row(
             children: [
               SizedBox(width: 10),
-              Text(chapterName, style: TextStyle(color: Colors.black, fontSize: 16)),
+              Text(modelPage.verseID, style: TextStyle(color: Colors.black, fontSize: 16)),
               SizedBox(width: 10),
               Expanded(
-                child: Text(description, style: TextStyle(color: Colors.black, fontSize: 14)), // Optional: display description
+                child: Text(modelPage.verse, style: TextStyle(color: Colors.black, fontSize: 14)), // Display the verse
               ),
-              Icon(Icons.book, color: fontGold, size: 30),
+              Icon(Icons.book, color: Colors.yellow, size: 30),
             ],
           ),
         ),
