@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:alphabeticalquran/Models/VerseChapterModel.dart';
 import 'package:http/http.dart' as http;
 
+import '../Models/ChapterInfoModel.dart';
+
 class ApiService {
   final String baseUrl = 'https://api.quran.com/api/v4';
 
@@ -34,6 +36,22 @@ class ApiService {
       return VerseChapterModel.fromJson(data);
     } else {
       throw Exception('Failed to load data');
+    }
+  }
+
+  Future<ChapterInfoModel> getChapter(int id) async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/chapters/$id'),
+      headers: {
+        'Accept': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      return ChapterInfoModel.fromJson(data);
+    } else {
+      throw Exception('Failed to load chapter info');
     }
   }
 }
