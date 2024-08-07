@@ -132,12 +132,12 @@ class _UrduQuranState extends State<UrduQuran> {
                 SizedBox(width: 5),
                 SizedBox(
                     width: 30,
-                    child: Text(chapterId, style: TextStyle(color: Colors.black, fontSize: 16))),
+                    child: Text(chapterId, style: TextStyle(color: Colors.black, fontSize: 16,fontFamily: 'elmessiri'))),
                 SizedBox(width: 10),
                 Expanded(
-                  child: Text(ArabicName, style: TextStyle(color: Colors.black, fontSize: 16)), // Optional: display description
+                  child: Text(ArabicName, style: TextStyle(color: Colors.black, fontSize: 20,fontFamily: 'jnr')), // Optional: display description
                 ),
-                Text(ChapterName, style: TextStyle(color: Colors.black, fontSize: 16)),
+                Text(ChapterName, style: TextStyle(color: Colors.black, fontSize: 16,fontFamily: 'elmessiri')),
               ],
             ),
           ),

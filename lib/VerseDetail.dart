@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:alphabeticalquran/Models/ChapterInfoModel.dart';
+import 'package:alphabeticalquran/Models/VerseInfoModel.dart';
+import 'package:alphabeticalquran/Models/VerseArabicModel.dart';
+import 'Remote/ApiService.dart';
+
 
 class VerseDetail extends StatefulWidget {
   const VerseDetail({super.key});
@@ -8,6 +13,34 @@ class VerseDetail extends StatefulWidget {
 }
 
 class _VerseDetailState extends State<VerseDetail> {
+  final ApiService apiService = ApiService();
+
+  ChapterInfoModel? chapterInfo;
+  VerseInfoModel? verseInfo;
+  VerseArabicModel? verseArabic;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchData();
+  }
+
+  Future<void> _fetchData() async {
+    try {
+      ChapterInfoModel chapterData = await apiService.getChapter(33); // example chapter id
+      VerseInfoModel verseData =await apiService.getVerse('33:5'); // example verse key
+      VerseArabicModel verseArabicData = await apiService.getVerseArabic('33:5'); // example verse key
+
+      setState(() {
+        chapterInfo = chapterData;
+        verseInfo = verseData;
+        verseArabic = verseArabicData;
+      });
+    } catch (e) {
+      print('Error fetching data: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,20 +60,20 @@ class _VerseDetailState extends State<VerseDetail> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(0,20,20,0),
+        padding: const EdgeInsets.fromLTRB(0, 20, 20, 0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SectionTitle(title: 'Chapter Name:'),
-              SectionContent(content: 'Al-Ahzab, Al-\'Aĥzāb, الأحزاب'),
+              SectionContent(content: chapterInfo?.chapter.nameSimple ?? 'Loading...'),
               SectionTitle(title: 'Revelation Place:'),
-              SectionContent(content: 'madinah'),
+              SectionContent(content: chapterInfo?.chapter.revelationPlace ?? 'Loading...'),
               SectionTitle(title: 'Verse:'),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 20),
+                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
                 child: Text(
-                  'ٱدْعُوهُمْ لِءَابَآئِهِمْ هُوَ أَقْسَطُ عِندَ ٱللَّهِ فَإِن لَّمْ تَعْلَمُوٓا۟ ءَابَآءَهُمْ فَإِخْوَٰنُكُمْ فِى ٱلدِّينِ وَمَوَٰلِيكُمْ وَلَيْسَ عَلَيْكُمْ جُنَاحٌ فِيمَآ أَخْطَأْتُم بِهِۦ وَلَٰكِن مَّا تَعَمَّدَتْ قُلُوبُكُمْ ۚ وَكَانَ ٱللَّهُ غَفُورًۭا رَّحِيمًۭا',
+                  verseArabic?.verses[0].textIndopak ?? 'Loading...',
                   style: TextStyle(
                     fontFamily: 'jnr',
                     fontSize: 20,
@@ -49,14 +82,12 @@ class _VerseDetailState extends State<VerseDetail> {
                 ),
               ),
               SectionTitle(title: 'Translation:'),
-              SectionContent(
-                content:
-                'Mooh bole beton(adopted sons) ko unke baapon (fathers) ki nisbat se pukaro, yeh Allah ke nazdeek zyada munsifana (equitable) baat hai. Aur agar tumhein maloom na ho ke unke baap kaun hain to woh tumhare deeni bhai aur rafeeq hain. Na danishta jo baat tum kaho iske liye tumpar koi giraft(pakad) nahin hai, lekin us baat par zaroor giraft hai jiska tum dil se irada karo. Allah darguzar karne wala aur raheem hai',
-              ),
+              SectionContent(content: verseInfo?.verse.translations[1].text?? 'Loading...'),
               SectionTitle(title: 'Translation Urdu:'),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 20),
-                child: Text('منہ بولے بیٹوں کو ان کے باپوں کی نسبت سے پکارو،یہ الله کے نزدیک زیادہ منصفانہ بات ہے۔\n1 اور اگر تمہیں معلوم نہ ہو کہ ان کے باپ کون ہے تو وہ تمہارے دینی بھائی اور رفیق ہیں۔\n2 نادانستہ جو بات تم کہو اس کے لیے تم پر کوئی گرفت نہیں ہے، لیکن اس بات پر ضرور گرفت ہے جس کا تم دل سے ارادہ کرو۔\n3 الله در گزر کرنے والا اور رحیم ہے۔\n4',
+                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
+                child: Text(
+                  verseInfo?.verse.translations[0].text ?? 'Loading...',
                   style: TextStyle(
                     fontFamily: 'jnr',
                     fontSize: 20,
@@ -103,7 +134,7 @@ class SectionContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0,horizontal: 20),
+      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 20),
       child: Text(
         content,
         style: TextStyle(
