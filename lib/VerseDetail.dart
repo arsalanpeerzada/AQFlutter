@@ -27,7 +27,7 @@ class _VerseDetailState extends State<VerseDetail> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.fromLTRB(0,20,20,0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,11 +38,11 @@ class _VerseDetailState extends State<VerseDetail> {
               SectionContent(content: 'madinah'),
               SectionTitle(title: 'Verse:'),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                padding: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 20),
                 child: Text(
                   'ٱدْعُوهُمْ لِءَابَآئِهِمْ هُوَ أَقْسَطُ عِندَ ٱللَّهِ فَإِن لَّمْ تَعْلَمُوٓا۟ ءَابَآءَهُمْ فَإِخْوَٰنُكُمْ فِى ٱلدِّينِ وَمَوَٰلِيكُمْ وَلَيْسَ عَلَيْكُمْ جُنَاحٌ فِيمَآ أَخْطَأْتُم بِهِۦ وَلَٰكِن مَّا تَعَمَّدَتْ قُلُوبُكُمْ ۚ وَكَانَ ٱللَّهُ غَفُورًۭا رَّحِيمًۭا',
                   style: TextStyle(
-                    fontFamily: 'elmessiri',
+                    fontFamily: 'jnr',
                     fontSize: 20,
                   ),
                   textAlign: TextAlign.right,
@@ -54,9 +54,15 @@ class _VerseDetailState extends State<VerseDetail> {
                 'Mooh bole beton(adopted sons) ko unke baapon (fathers) ki nisbat se pukaro, yeh Allah ke nazdeek zyada munsifana (equitable) baat hai. Aur agar tumhein maloom na ho ke unke baap kaun hain to woh tumhare deeni bhai aur rafeeq hain. Na danishta jo baat tum kaho iske liye tumpar koi giraft(pakad) nahin hai, lekin us baat par zaroor giraft hai jiska tum dil se irada karo. Allah darguzar karne wala aur raheem hai',
               ),
               SectionTitle(title: 'Translation Urdu:'),
-              SectionContent(
-                content:
-                'منہ بولے بیٹوں کو ان کے باپوں کی نسبت سے پکارو،یہ الله کے نزدیک زیادہ منصفانہ بات ہے۔\n1 اور اگر تمہیں معلوم نہ ہو کہ ان کے باپ کون ہے تو وہ تمہارے دینی بھائی اور رفیق ہیں۔\n2 نادانستہ جو بات تم کہو اس کے لیے تم پر کوئی گرفت نہیں ہے، لیکن اس بات پر ضرور گرفت ہے جس کا تم دل سے ارادہ کرو۔\n3 الله در گزر کرنے والا اور رحیم ہے۔\n4',
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 20),
+                child: Text('منہ بولے بیٹوں کو ان کے باپوں کی نسبت سے پکارو،یہ الله کے نزدیک زیادہ منصفانہ بات ہے۔\n1 اور اگر تمہیں معلوم نہ ہو کہ ان کے باپ کون ہے تو وہ تمہارے دینی بھائی اور رفیق ہیں۔\n2 نادانستہ جو بات تم کہو اس کے لیے تم پر کوئی گرفت نہیں ہے، لیکن اس بات پر ضرور گرفت ہے جس کا تم دل سے ارادہ کرو۔\n3 الله در گزر کرنے والا اور رحیم ہے۔\n4',
+                  style: TextStyle(
+                    fontFamily: 'jnr',
+                    fontSize: 20,
+                  ),
+                  textAlign: TextAlign.right,
+                ),
               ),
             ],
           ),
@@ -97,11 +103,11 @@ class SectionContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      padding: const EdgeInsets.symmetric(vertical: 4.0,horizontal: 20),
       child: Text(
         content,
         style: TextStyle(
-          fontSize: 16,
+          fontSize: 20,
           fontFamily: 'elmessiri',
         ),
       ),
