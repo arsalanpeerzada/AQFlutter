@@ -134,12 +134,12 @@ class _AlphaQuranState extends State<AlphaQuran> {
             child: Row(
               children: [
                 SizedBox(width: 10),
-                Text(chapterName, style: TextStyle(color: Colors.black, fontSize: 16)),
+                Text(chapterName, style: TextStyle(color: Colors.black, fontSize: 16,fontFamily: 'elmessiri')),
                 SizedBox(width: 10),
                 Expanded(
-                  child: Text(TopicName, style: TextStyle(color: Colors.black, fontSize: 14)), // Optional: display description
+                  child: Text(TopicName, style: TextStyle(color: Colors.black, fontSize: 16,fontFamily: 'elmessiri')), // Optional: display description
                 ),
-                Icon(Icons.book, color: fontGold, size: 30),
+                Image.asset('images/book.png',width: 30,height: 30,),
               ],
             ),
           ),

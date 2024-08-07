@@ -29,7 +29,13 @@ class _EnglishQuranVersesState extends State<EnglishQuranVerses> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Surah ${widget.chapterName}'),
+        backgroundColor: Color(0xFF003F38),
+        centerTitle: false,
+        title: Text(widget.chapterName),
+        titleTextStyle: TextStyle(fontFamily: 'elmessiri',color: Colors.white,fontSize: 23),
+        iconTheme: IconThemeData(
+          color: Colors.white, // Set your desired color for the back button here
+        ),
       ),
       body: FutureBuilder<VerseChapterModel>(
         future: futureChapter,
@@ -42,7 +48,9 @@ class _EnglishQuranVersesState extends State<EnglishQuranVerses> {
             return ListView.builder(
               itemCount: snapshot.data!.translations.length,
               itemBuilder: (context, index) {
-                return _buildCustomListItem(snapshot.data!.translations[index].text,index);
+                String data = snapshot.data!.translations[index].text.toString();
+                String normalText = data.replaceAll(RegExp(r'<[^>]*>'), '');
+                return _buildCustomListItem(normalText,index);
               },
             );
           } else {
@@ -67,10 +75,10 @@ Widget _buildCustomListItem(chapter , index) {
         child: Row(
           children: [
             SizedBox(width: 10),
-            Text(chapterId, style: TextStyle(color: Colors.black, fontSize: 16)),
-            SizedBox(width: 15),
+            Text(chapterId, style: TextStyle(color: Colors.black, fontSize: 16,fontFamily: 'elmessiri')),
+            SizedBox(width: 20),
             Expanded(
-              child: Text(ChapterName, style: TextStyle(color: Colors.black, fontSize: 16)), // Optional: display description
+              child: Text(ChapterName, style: TextStyle(color: Colors.black, fontSize: 16,fontFamily: 'elmessiri')), // Optional: display description
             ),
           ],
         ),

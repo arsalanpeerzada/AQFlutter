@@ -79,7 +79,8 @@ class _ArabicQuranState extends State<ArabicQuran> {
                     textAlign: TextAlign.left,
                     style: TextStyle(
                         fontSize: 30,
-                        color: white),
+                        color: white
+                        ),
                   ),
                 ],
               ),
@@ -129,7 +130,7 @@ class _ArabicQuranState extends State<ArabicQuran> {
           ),
           Container(
             color: white,
-            padding: EdgeInsets.symmetric(vertical: 0.0,horizontal: 8.0), // Added padding for better UI
+            padding: EdgeInsets.fromLTRB(10,0,30,0), // Added padding for better UI
             child: Row(
               children: [
                 SizedBox(width: 5),
@@ -138,9 +139,9 @@ class _ArabicQuranState extends State<ArabicQuran> {
                     child: Text(chapterId, style: TextStyle(color: Colors.black, fontSize: 16))),
                 SizedBox(width: 10),
                 Expanded(
-                  child: Text(ChapterName, style: TextStyle(color: Colors.black, fontSize: 16)), // Optional: display description
+                  child: Text(ChapterName, style: TextStyle(color: Colors.black, fontSize: 16,fontFamily: 'elmessiri')), // Optional: display description
                 ),
-                Text(ArabicName, style: TextStyle(color: Colors.black, fontSize: 16)),
+                Text(ArabicName, style: TextStyle(color: Colors.black, fontSize: 16,fontFamily: 'jnr')),
               ],
             ),
           ),
@@ -150,7 +151,7 @@ class _ArabicQuranState extends State<ArabicQuran> {
           Row(
             children: [
               SizedBox(width: 55),
-              Text(desc, style: TextStyle(color: Colors.grey, fontSize: 12)),
+              Text(desc, style: TextStyle(color: Colors.grey, fontSize: 12,fontFamily: 'elmessiri')),
             ],
           ),
           Container(

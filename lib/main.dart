@@ -1,3 +1,5 @@
+import 'dart:convert'; // for using json.decode
+
 import 'package:alphabeticalquran/alphaquran.dart';
 import 'package:alphabeticalquran/arabicquran.dart';
 import 'package:alphabeticalquran/englishquran.dart';
@@ -5,7 +7,6 @@ import 'package:alphabeticalquran/splach_screen.dart';
 import 'package:alphabeticalquran/urduquran.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert'; // for using json.decode
 import 'package:intl/intl.dart';
 
 void main() {
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Alphabetical Quran',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF003D35)),
         useMaterial3: true,
       ),
       home: SplashScreen(), //const MyHomePage(title: 'Alphabetical Quran'),
@@ -99,6 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 35,
+                          fontFamily: 'elmessiri',
                           color: fontGold,
                           fontWeight: FontWeight.bold),
                     ),
@@ -127,7 +129,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text(
                     'World\'s First and only Alphabetical Quran (since 2005) where The ayahs of the Quran are arranged under major topics sorted alphabetically a handy tool for research. Explore & Search Quran Arranged Alphabetically By Topics of Interest.',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 12, color: Color(0xFFFFDE93)),
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontFamily: 'elmessiri',
+                        color: Color(0xFFFFDE93)),
                   ),
                 ),
               ),
@@ -137,6 +142,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Container(
                   color: fontGold,
                 ),
+              ),
+              SizedBox(
+                height: 10,
               ),
               IntrinsicHeight(
                 child: InkWell(
@@ -168,12 +176,18 @@ class _MyHomePageState extends State<MyHomePage> {
                             Text(
                               'Alphabetical Quran',
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 16, color: fontGold),
+                              style: TextStyle(
+                                  fontSize: 25,
+                                  color: fontGold,
+                                  fontFamily: 'elmessiri'),
                             ),
                             Text(
                               'Explore & Search Quran Arranged Alphabetically By Topics of Interest.',
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 12, color: fontGold),
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  color: fontGold,
+                                  fontFamily: 'elmessiri'),
                             ),
                           ],
                         ),
@@ -185,13 +199,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
-
+              SizedBox(
+                height: 10,
+              ),
               SizedBox(
                 height: 1,
                 child: Container(
                   color: fontGold,
                 ),
               ),
+
               IntrinsicHeight(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -283,7 +300,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         print('Button Pressed!');
                       },
                     ),
-                    SizedBox(width: 70),
+                    SizedBox(width: 73),
                     Container(
                       width: 1,
                       color: Color(0xFFFFDE93),
@@ -311,7 +328,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text(
                   'Created By Syed Ammar Shah (author@jsdol.org)\nDeveloped by Teniqs.com',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 12, color: fontGold),
+                  style: TextStyle(fontSize: 12, color: fontGold,fontFamily: 'elmessiri'),
                 ),
               ),
             ],
@@ -361,7 +378,8 @@ class ImageTextButton extends StatelessWidget {
             buttonText,
             style: TextStyle(
                 fontSize: 14, // Font size for the text
-                color: fontGold // Font weight
+                color: fontGold,
+                fontFamily: 'elmessiri' // Font weight
                 ),
           ),
           SizedBox(height: 5),
@@ -411,7 +429,8 @@ class ImageTextButton2 extends StatelessWidget {
             buttonText,
             style: TextStyle(
                 fontSize: 14, // Font size for the text
-                color: fontGold // Font weight
+                color: fontGold,
+                fontFamily: 'elmessiri' // Font weight
                 ),
           ),
           SizedBox(height: 5),

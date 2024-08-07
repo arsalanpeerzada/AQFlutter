@@ -1,3 +1,4 @@
+import 'package:alphabeticalquran/VerseDetail.dart';
 import 'package:flutter/material.dart';
 
 import 'Utils/FileReaderClass.dart';
@@ -73,75 +74,72 @@ class _AlphaQuranVerseState extends State<AlphaQuranVerse> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        color: white,
-        child: Column(
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              height: 250,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("images/header.png"),
-                  fit: BoxFit
-                      .cover, // This ensures the image covers the screen
+      appBar: AppBar(
+        backgroundColor: Color(0xFF003F38),
+        centerTitle: false,
+        title: Text(widget.chapterName),
+        titleTextStyle: TextStyle(fontFamily: 'elmessiri',color: Colors.white,fontSize: 23),
+        iconTheme: IconThemeData(
+          color: Colors.white, // Set your desired color for the back button here
+        ),
+      ),
+      body: SafeArea(
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          color: white,
+          child: Column(
+            children: <Widget>[
+              Expanded(// Use Expanded to fill the remaining space
+                child: ListView.builder(
+                  itemCount: modelPageList.length,
+                  itemBuilder: (context, index) {
+                    ModelPage modelPage = modelPageList[index];
+                    return _buildCustomListItem(modelPage);
+                  },
                 ),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    "Alphabetical Quran",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        fontSize: 30,
-                        color: white),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(// Use Expanded to fill the remaining space
-              child: ListView.builder(
-                itemCount: modelPageList.length,
-                itemBuilder: (context, index) {
-                  ModelPage modelPage = modelPageList[index];
-                  return _buildCustomListItem(modelPage);
-                },
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 
   Widget _buildCustomListItem(ModelPage modelPage) {
-    return Column(
-      children: [
-        Container(
-          color: Colors.white,
-          padding: EdgeInsets.all(8), // Added padding for better UI
-          child: Row(
-            children: [
-              SizedBox(width: 10),
-              Text(modelPage.verseID, style: TextStyle(color: Colors.black, fontSize: 16)),
-              SizedBox(width: 10),
-              Expanded(
-                child: Text(modelPage.verse, style: TextStyle(color: Colors.black, fontSize: 14)), // Display the verse
-              ),
-              Icon(Icons.book, color: Colors.yellow, size: 30),
-            ],
+    return InkWell(
+      onTap: () {
+        // Navigate to the next page and pass the chapterId
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => VerseDetail(),
           ),
-        ),
-        SizedBox(
-          height: 1,
-          child: Container(
-            color: Colors.black,
+        );
+      },
+      child: Column(
+        children: [
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.all(10), // Added padding for better UI
+            child: Row(
+              children: [
+                Text(modelPage.verseID, style: TextStyle(color: Colors.black, fontSize: 16,fontFamily: 'elmessiri')),
+                SizedBox(width: 20),
+                Expanded(
+                  child: Text(modelPage.verse, style: TextStyle(color: Colors.black, fontSize: 16,fontFamily: 'elmessiri')), // Display the verse
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+          SizedBox(
+            height: 1,
+            child: Container(
+              color: Colors.black,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
