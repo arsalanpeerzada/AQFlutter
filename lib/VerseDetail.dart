@@ -6,7 +6,9 @@ import 'Remote/ApiService.dart';
 
 
 class VerseDetail extends StatefulWidget {
-  const VerseDetail({super.key});
+  final String verseID;
+
+  const VerseDetail({super.key, required this.verseID});
 
   @override
   State<VerseDetail> createState() => _VerseDetailState();
@@ -18,18 +20,25 @@ class _VerseDetailState extends State<VerseDetail> {
   ChapterInfoModel? chapterInfo;
   VerseInfoModel? verseInfo;
   VerseArabicModel? verseArabic;
+  String _verseID = "1:1";
+  int _verse = 1;
+
 
   @override
   void initState() {
     super.initState();
     _fetchData();
+    _verseID = widget.verseID;
+    String zeroIndex = _verseID.split(":")[0];
+    _verse = int.parse(zeroIndex);
+
   }
 
   Future<void> _fetchData() async {
     try {
-      ChapterInfoModel chapterData = await apiService.getChapter(33); // example chapter id
-      VerseInfoModel verseData =await apiService.getVerse('33:5'); // example verse key
-      VerseArabicModel verseArabicData = await apiService.getVerseArabic('33:5'); // example verse key
+      ChapterInfoModel chapterData = await apiService.getChapter(_verse); // example chapter id
+      VerseInfoModel verseData =await apiService.getVerse(_verseID); // example verse key
+      VerseArabicModel verseArabicData = await apiService.getVerseArabic(_verseID); // example verse key
 
       setState(() {
         chapterInfo = chapterData;

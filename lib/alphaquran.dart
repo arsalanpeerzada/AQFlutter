@@ -69,36 +69,50 @@ class _AlphaQuranState extends State<AlphaQuran> {
         color: white,
         child: Column(
           children: <Widget>[
-            Container(
-              width: double.infinity,
-              height: 250,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("images/header.png"),
-                  fit: BoxFit
-                      .cover, // This ensures the image covers the screen
-                ),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    "Alphabetical Quran",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        fontSize: 30,
-                        color: white),
+            Stack(
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: 250,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("images/header.png"),
+                      fit: BoxFit.cover, // This ensures the image covers the screen
+                    ),
                   ),
-                ],
-              ),
-            ),
-            Container(
-              child: Expanded(// Use Expanded to fill the remaining space
-                child: ListView(
-                  children: chapters.entries.map((entry) {
-                    return _buildCustomListItem({entry.key: entry.value});
-                  }).toList(),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        "Alphabetical Quran",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                            fontSize: 30,
+                            color: white),
+                      ),
+                    ],
+                  ),
                 ),
+                Container(
+                  color: Colors.black.withOpacity(0.3), // Full-width black background
+                  padding: EdgeInsets.fromLTRB(16,30,16,0), // Add padding around the IconButton
+                  child: Align(
+                    alignment: Alignment.centerLeft, // Align the button to the left
+                    child: IconButton(
+                      icon: Icon(Icons.arrow_back, color: white),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Expanded( // Use Expanded to fill the remaining space
+              child: ListView(
+                children: chapters.entries.map((entry) {
+                  return _buildCustomListItem({entry.key: entry.value});
+                }).toList(),
               ),
             ),
           ],
@@ -106,6 +120,7 @@ class _AlphaQuranState extends State<AlphaQuran> {
       ),
     );
   }
+
 
   Widget _buildCustomListItem(Map<String, String> chapter) {
     // Assuming the map has only one entry: {'chapterName': 'description'}

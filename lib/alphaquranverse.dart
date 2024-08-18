@@ -1,6 +1,5 @@
 import 'package:alphabeticalquran/VerseDetail.dart';
 import 'package:flutter/material.dart';
-
 import 'Utils/FileReaderClass.dart';
 
 class AlphaQuranVerse extends StatefulWidget {
@@ -83,24 +82,22 @@ class _AlphaQuranVerseState extends State<AlphaQuranVerse> {
           color: Colors.white, // Set your desired color for the back button here
         ),
       ),
-      body: SafeArea(
-        child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          color: white,
-          child: Column(
-            children: <Widget>[
-              Expanded(// Use Expanded to fill the remaining space
-                child: ListView.builder(
-                  itemCount: modelPageList.length,
-                  itemBuilder: (context, index) {
-                    ModelPage modelPage = modelPageList[index];
-                    return _buildCustomListItem(modelPage);
-                  },
-                ),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        color: white,
+        child: Column(
+          children: <Widget>[
+            Expanded(// Use Expanded to fill the remaining space
+              child: ListView.builder(
+                itemCount: modelPageList.length,
+                itemBuilder: (context, index) {
+                  ModelPage modelPage = modelPageList[index];
+                  return _buildCustomListItem(modelPage);
+                },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -113,7 +110,7 @@ class _AlphaQuranVerseState extends State<AlphaQuranVerse> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => VerseDetail(),
+            builder: (context) => VerseDetail(verseID: modelPage.verseID),
           ),
         );
       },
