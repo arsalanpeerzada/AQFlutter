@@ -1,5 +1,6 @@
 import 'dart:convert'; // for using json.decode
 
+import 'package:alphabeticalquran/aboutQuran.dart';
 import 'package:alphabeticalquran/alphaquran.dart';
 import 'package:alphabeticalquran/arabicquran.dart';
 import 'package:alphabeticalquran/englishquran.dart';
@@ -276,7 +277,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       // Update with your image path
                       buttonText: 'About Quran',
                       onTap: () {
-                        print('Button Pressed!');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => aboutQuran()),
+                        );
                       },
                     ),
                   ],
