@@ -367,7 +367,7 @@ class ImageTextButton extends StatelessWidget {
           Image.asset(
             imagePath,
             width: 50, // Specify your image width
-            height: 50, // Specify your image height
+            height: 80, // Specify your image height
             fit: BoxFit.cover, // Cover the given space
           ),
           SizedBox(height: 2),
@@ -417,13 +417,13 @@ class ImageTextButton2 extends StatelessWidget {
           SizedBox(height: 10),
           Image.asset(
             imagePath,
-            width: 40, // Specify your image width
-            height: 40, // Specify your image height
+            width: 50, // Specify your image width
+            height: 50, // Specify your image height
             fit: BoxFit.cover, // Cover the given space
           ),
           SizedBox(height: 5),
           SizedBox(
-            height: 2,
+            height: 10,
             child: Container(
               color: fontGold,
             ),
@@ -481,3 +481,5 @@ String getCurrentDate() {
   DateFormat formatter = DateFormat('dd-MM-yyyy');
   return formatter.format(now);
 }
+
+

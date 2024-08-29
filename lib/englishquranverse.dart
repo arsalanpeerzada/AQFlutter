@@ -63,9 +63,9 @@ class _EnglishQuranVersesState extends State<EnglishQuranVerses> {
 }
 
 
-Widget _buildCustomListItem(chapter , index) {
-  String chapterId = index.toString();
-   String ChapterName = chapter;
+Widget _buildCustomListItem(chapter, int index) {
+  String chapterId = (index + 1).toString();
+  String ChapterName = chapter;
 
   return Column(
     children: [
@@ -80,6 +80,7 @@ Widget _buildCustomListItem(chapter , index) {
             Expanded(
               child: Text(ChapterName, style: TextStyle(color: Colors.black, fontSize: 16,fontFamily: 'elmessiri')), // Optional: display description
             ),
+            SizedBox(width: 20),
           ],
         ),
       ),

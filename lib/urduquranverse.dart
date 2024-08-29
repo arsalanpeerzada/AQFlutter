@@ -30,6 +30,7 @@ class _UrduQuranVerseState extends State<UrduQuranVerse> {
     return Scaffold(
       appBar: AppBar(
         title: Text(' سورۃ ${widget.chapterName}'),
+          titleTextStyle: TextStyle(fontFamily: 'jnr',color: Colors.black,fontSize: 23)
       ),
       body: FutureBuilder<VerseChapterModel>(
         future: futureChapter,
@@ -56,8 +57,10 @@ class _UrduQuranVerseState extends State<UrduQuranVerse> {
 
 
 Widget _buildCustomListItem(chapter , index) {
-  String chapterId = index.toString();
-   String ChapterName = chapter;
+  String chapterId = (index + 1).toString();
+  String ChapterName = chapter.replaceAll(RegExp(r'<[^>]*>'), '');
+  ;
+  //String urduText = originalText.replaceAll(RegExp(r'<[^>]*>'), '');
 
   return Column(
     children: [
@@ -66,12 +69,17 @@ Widget _buildCustomListItem(chapter , index) {
         padding: EdgeInsets.all(8), // Added padding for better UI
         child: Row(
           children: [
+            SizedBox(width: 20),
             Expanded(
-              child: Text(ChapterName, style: TextStyle(color: Colors.black, fontSize: 16)), // Optional: display description
+              child: Text(ChapterName,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontFamily: "jnr")), // Optional: display description
             ),
             SizedBox(width: 15),
             Text(chapterId, style: TextStyle(color: Colors.black, fontSize: 16)),
-            SizedBox(width: 10),
+            SizedBox(width: 15),
           ],
         ),
       ),
