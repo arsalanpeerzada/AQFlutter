@@ -92,9 +92,9 @@ class aboutUs extends StatelessWidget {
                   onTap: () async {
                     const url = 'https://teniqs.com';
                     if (await canLaunchUrl(Uri.parse(url))) {
-                    await launchUrl(Uri.parse(url));
+                      await launchUrl(Uri.parse(url));
                     } else {
-                    throw 'Could not launch $url';
+                      throw 'Could not launch $url';
                     }
                   },
                   child: Text(

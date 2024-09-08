@@ -9,6 +9,7 @@ import 'package:alphabeticalquran/urduquran.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const MyApp());
@@ -300,8 +301,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       imagePath: 'images/facebook.png',
                       // Update with your image path
                       buttonText: 'Facebook',
-                      onTap: () {
-                        print('Button Pressed!');
+                      onTap: () async {
+                        // https://www.facebook.com/alphabeticalquran
+                        const url =
+                            'https://www.facebook.com/alphabeticalquran';
+                        if (await canLaunchUrl(Uri.parse(url))) {
+                          await launchUrl(Uri.parse(url));
+                        } else {
+                          throw 'Could not launch $url';
+                        }
                       },
                     ),
                     SizedBox(width: 73),
@@ -314,8 +322,16 @@ class _MyHomePageState extends State<MyHomePage> {
                       imagePath: 'images/instagram.png',
                       // Update with your image path
                       buttonText: 'Instagram',
-                      onTap: () {
-                        print('Button Pressed!');
+                      onTap: () async {
+                        // https://www.instagram.com/alphabeticalquran
+
+                        const url =
+                            'https://www.instagram.com/alphabeticalquran';
+                        if (await canLaunchUrl(Uri.parse(url))) {
+                        await launchUrl(Uri.parse(url));
+                        } else {
+                        throw 'Could not launch $url';
+                        }
                       },
                     ),
                   ],

@@ -22,6 +22,7 @@ class _VerseDetailState extends State<VerseDetail> {
   VerseArabicModel? verseArabic;
   String _verseID = "1:1";
   int _verse = 1;
+  String urdu = "";
 
 
   @override
@@ -44,6 +45,7 @@ class _VerseDetailState extends State<VerseDetail> {
         chapterInfo = chapterData;
         verseInfo = verseData;
         verseArabic = verseArabicData;
+        urdu =  verseInfo!.verse.translations[0].text.replaceAll(RegExp(r'<[^>]*>'), '');
       });
     } catch (e) {
       print('Error fetching data: $e');
@@ -84,7 +86,7 @@ class _VerseDetailState extends State<VerseDetail> {
                 child: Text(
                   verseArabic?.verses[0].textIndopak ?? 'Loading...',
                   style: TextStyle(
-                    fontFamily: 'jnr',
+                    fontFamily: 'scheherazae',
                     fontSize: 20,
                   ),
                   textAlign: TextAlign.right,
@@ -96,7 +98,7 @@ class _VerseDetailState extends State<VerseDetail> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
                 child: Text(
-                  verseInfo?.verse.translations[0].text ?? 'Loading...',
+                  urdu,
                   style: TextStyle(
                     fontFamily: 'jnr',
                     fontSize: 20,

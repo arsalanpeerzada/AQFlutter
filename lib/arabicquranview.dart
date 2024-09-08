@@ -147,7 +147,12 @@ class ArabicQuranView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xFF003F38),
         title: Text(chapterName),
+        iconTheme: IconThemeData(
+          color: Colors.white, // Change the back button color
+        ),
+        titleTextStyle: TextStyle(fontFamily: 'elmessiri',color: Colors.white,fontSize: 23),
       ),
       body: FutureBuilder<File>(
         future: _loadPDFFile(), // Change this to load your PDF file

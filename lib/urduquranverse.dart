@@ -29,9 +29,13 @@ class _UrduQuranVerseState extends State<UrduQuranVerse> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(' سورۃ ${widget.chapterName}'),
-          titleTextStyle: TextStyle(fontFamily: 'jnr',color: Colors.black,fontSize: 23)
-      ),
+          backgroundColor: Color(0xFF003F38),
+          title: Text(' سورۃ ${widget.chapterName}'),
+          iconTheme: IconThemeData(
+            color: Colors.white, // Change the back button color
+          ),
+          titleTextStyle:
+              TextStyle(fontFamily: 'jnr', color: Colors.white, fontSize: 25)),
       body: FutureBuilder<VerseChapterModel>(
         future: futureChapter,
         builder: (context, snapshot) {
@@ -59,7 +63,6 @@ class _UrduQuranVerseState extends State<UrduQuranVerse> {
 Widget _buildCustomListItem(chapter , index) {
   String chapterId = (index + 1).toString();
   String ChapterName = chapter.replaceAll(RegExp(r'<[^>]*>'), '');
-  ;
   //String urduText = originalText.replaceAll(RegExp(r'<[^>]*>'), '');
 
   return Column(
@@ -74,11 +77,12 @@ Widget _buildCustomListItem(chapter , index) {
               child: Text(ChapterName,
                   style: TextStyle(
                       color: Colors.black,
-                      fontSize: 16,
+                      fontSize: 20,
                       fontFamily: "jnr")), // Optional: display description
             ),
             SizedBox(width: 15),
-            Text(chapterId, style: TextStyle(color: Colors.black, fontSize: 16)),
+            Text(chapterId,
+                style: TextStyle(color: Colors.black, fontSize: 20)),
             SizedBox(width: 15),
           ],
         ),
