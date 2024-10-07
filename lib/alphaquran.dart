@@ -1,3 +1,4 @@
+import 'package:alphabeticalquran/QuranSearchPage.dart';
 import 'package:alphabeticalquran/aboutQuran.dart';
 import 'package:alphabeticalquran/aboutUs.dart';
 import 'package:alphabeticalquran/alphaquranverse.dart';
@@ -108,22 +109,37 @@ class _AlphaQuranState extends State<AlphaQuran> {
                           Navigator.of(context).pop();
                         },
                       ),
-                      PopupMenuButton(
-                        icon: Icon(Icons.more_vert, color: Colors.white),
-                        onSelected: (value) {
-                          _onMenuItemSelected(value as int);
-                        },
-                        offset: Offset(0.0, appBarHeight),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        itemBuilder: (ctx) => [
-                          _buildPopupMenuItem(
-                              'Privacy Policy', Options.privacyPolicy.index),
-                          _buildPopupMenuItem(
-                              'About Us', Options.aboutUs.index),
-                          _buildPopupMenuItem(
-                              'About Quran', Options.aboutQuran.index),
+                      Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.search_sharp, color: Colors.white),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => QuranSearchPage(),
+                                ),
+                              );
+                            },
+                          ),
+                          PopupMenuButton(
+                            icon: Icon(Icons.more_vert, color: Colors.white),
+                            onSelected: (value) {
+                              _onMenuItemSelected(value as int);
+                            },
+                            offset: Offset(0.0, appBarHeight),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            itemBuilder: (ctx) => [
+                              _buildPopupMenuItem(
+                                  'Privacy Policy', Options.privacyPolicy.index),
+                              _buildPopupMenuItem(
+                                  'About Us', Options.aboutUs.index),
+                              _buildPopupMenuItem(
+                                  'About Quran', Options.aboutQuran.index),
+                            ],
+                          ),
                         ],
                       )
                     ],
