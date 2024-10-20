@@ -98,7 +98,7 @@ class aboutUs extends StatelessWidget {
                     }
                   },
                   child: Text(
-                    "https://teniqs.com/",
+                    "https://teniqs.com",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,

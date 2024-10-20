@@ -148,7 +148,7 @@ class ArabicQuranView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF003F38),
-        title: Text(chapterName),
+        title: Text(chapterName,textAlign: TextAlign.left,),
         iconTheme: IconThemeData(
           color: Colors.white, // Change the back button color
         ),

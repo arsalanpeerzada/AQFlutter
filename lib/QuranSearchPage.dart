@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'dart:convert';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'Utils/FileReaderClass.dart';
+import 'VerseDetail.dart';
 class QuranSearchPage extends StatefulWidget {
   @override
   _QuranSearchPageState createState() => _QuranSearchPageState();
@@ -108,28 +108,38 @@ class _QuranSearchPageState extends State<QuranSearchPage> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                        child: Row(
-                          children: [
-                            Text(
-                              verseID,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontFamily: 'elmessiri',
+                        child: InkWell(
+                          onTap: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => VerseDetail(verseID: verseID),
                               ),
-                            ),
-                            SizedBox(width: 20),
-                            Expanded(
-                              child: Text(
-                                verse,
+                            );
+                          },
+                          child: Row(
+                            children: [
+                              Text(
+                                verseID,
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 16,
                                   fontFamily: 'elmessiri',
                                 ),
                               ),
-                            ),
-                          ],
+                              SizedBox(width: 20),
+                              Expanded(
+                                child: Text(
+                                  verse,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontFamily: 'elmessiri',
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(
