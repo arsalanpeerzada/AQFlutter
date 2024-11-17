@@ -2,6 +2,7 @@ import 'package:alphabeticalquran/Models/VerseChapterModel.dart';
 import 'package:flutter/material.dart';
 
 import 'Remote/ApiService.dart';
+import 'package:flutter/services.dart';
 
 class EnglishQuranVerses extends StatefulWidget {
   final int chapterId;
@@ -60,39 +61,56 @@ class _EnglishQuranVersesState extends State<EnglishQuranVerses> {
       ),
     );
   }
-}
+  Widget _buildCustomListItem(chapter, int index) {
+    String chapterId = (index + 1).toString();
+    String ChapterName = chapter;
 
-
-Widget _buildCustomListItem(chapter, int index) {
-  String chapterId = (index + 1).toString();
-  String ChapterName = chapter;
-
-  return Column(
-    children: [
-      Container(
-        color: Colors.white,
-        padding: EdgeInsets.all(8), // Added padding for better UI
-        child: Row(
-          children: [
-            SizedBox(width: 10),
-            Text(chapterId, style: TextStyle(color: Colors.black, fontSize: 16,fontFamily: 'elmessiri')),
-            SizedBox(width: 20),
-            Expanded(
-              child: Text(ChapterName, style: TextStyle(color: Colors.black, fontSize: 16,fontFamily: 'elmessiri')), // Optional: display description
-            ),
-            SizedBox(width: 20),
-          ],
-        ),
-      ),
-      Container(
-        padding: EdgeInsets.only(top: 5),
-        child: SizedBox(
-          height: 1,
-          child: Container(
-            color: Colors.black,
+    return InkWell(
+      onLongPress: () {
+        // Copy both verseID and verse to clipboard
+        Clipboard.setData(
+          ClipboardData(
+            text: '${chapterId} - ${ChapterName}',
           ),
-        ),
+        );
+        // Show a snackbar to notify the user
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Copied to clipboard!'),
+          ),
+        );
+      },
+      child: Column(
+        children: [
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.all(8), // Added padding for better UI
+            child: Row(
+              children: [
+                SizedBox(width: 10),
+                Text(chapterId, style: TextStyle(color: Colors.black, fontSize: 16,fontFamily: 'elmessiri')),
+                SizedBox(width: 20),
+                Expanded(
+                  child: Text(ChapterName, style: TextStyle(color: Colors.black, fontSize: 16,fontFamily: 'elmessiri')), // Optional: display description
+                ),
+                SizedBox(width: 20),
+              ],
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(top: 5),
+            child: SizedBox(
+              height: 1,
+              child: Container(
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ],
       ),
-    ],
-  );
+    );
+  }
 }
+
+
+

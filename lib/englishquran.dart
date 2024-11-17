@@ -1,11 +1,17 @@
 import 'dart:collection';
 import 'dart:convert';
 
+import 'package:alphabeticalquran/QuranSearchPage.dart';
+import 'package:alphabeticalquran/aboutQuran.dart';
+import 'package:alphabeticalquran/aboutUs.dart';
+import 'package:alphabeticalquran/alphaquran.dart';
+import 'package:alphabeticalquran/privacyPolicy.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
+import 'QuranSearchPageE.dart';
 import 'englishquranverse.dart';
 
 class EnglishQuran extends StatefulWidget {
@@ -19,15 +25,7 @@ class _AlphaQuranState extends State<EnglishQuran> {
   Color background = Color(0xFF003F38);
   Color fontGold = Color(0xFFFFDE93);
   Color white = Color(0xFFFFFFFF);
-
-
-  // Sample data for the list
-  // Map<String, String> chapters = {
-  //   "1": "The Opening",
-  //   "2": "The Cow",
-  //   "3": "The Family of Imran",
-  //   // Add more chapters or verses as needed
-  // };
+  var appBarHeight = AppBar().preferredSize.height;
   List chapters = [];
 
   @override
@@ -78,44 +76,115 @@ class _AlphaQuranState extends State<EnglishQuran> {
                         "Alphabetical Quran",
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                            fontSize: 30,
-                            color: white),
+                          fontSize: 30,
+                          color: Colors.white,
+                        ),
                       ),
                     ],
                   ),
                 ),
                 Container(
                   color: Colors.black.withOpacity(0.3), // Full-width black background
-                  padding: EdgeInsets.fromLTRB(16,30,16,0), // Add padding around the IconButton
-                  child: Align(
-                    alignment: Alignment.centerLeft, // Align the button to the left
-                    child: IconButton(
-                      icon: Icon(Icons.arrow_back, color: white),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
+                  padding: EdgeInsets.fromLTRB(16, 30, 16, 0),
+                  // Add padding around the IconButton
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // Align back button to left and menu to right
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.arrow_back, color: Colors.white),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.search_sharp, color: Colors.white),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => QuranSearchPageE(),
+                                ),
+                              );
+                            },
+                          ),
+                          PopupMenuButton(
+                            icon: Icon(Icons.more_vert, color: Colors.white),
+                            onSelected: (value) {
+                              _onMenuItemSelected(value as int);
+                            },
+                            offset: Offset(0.0, appBarHeight),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            itemBuilder: (ctx) => [
+                              _buildPopupMenuItem(
+                                  'Privacy Policy', Options.privacyPolicy.index),
+                              _buildPopupMenuItem(
+                                  'About Us', Options.aboutUs.index),
+                              _buildPopupMenuItem(
+                                  'About Quran', Options.aboutQuran.index),
+                            ],
+                          ),
+                        ],
+                      )
+                    ],
                   ),
                 ),
               ],
             ),
-            Container(
-              child: Expanded(// Use Expanded to fill the remaining space
-                child: chapters.isEmpty
-                    ? Center(child: CircularProgressIndicator())
-                    : ListView.builder(
-                  itemCount: chapters.length,
-                  itemBuilder: (context, index) {
-                    final chapter = chapters[index];
-                    return _buildCustomListItem(chapter);
-                  },
-                ),
+            Expanded(// Use Expanded to fill the remaining space
+              child: chapters.isEmpty
+                  ? Center(child: CircularProgressIndicator())
+                  : ListView.builder(
+                itemCount: chapters.length,
+                itemBuilder: (context, index) {
+                  final chapter = chapters[index];
+                  return _buildCustomListItem(chapter);
+                },
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+
+  PopupMenuItem _buildPopupMenuItem(String title, int position) {
+    return PopupMenuItem(
+      value: position,
+      child: Text(title),
+    );
+  }
+
+  // Function to handle the menu item selection
+  void _onMenuItemSelected(int value) {
+    switch (value) {
+      case 0:
+      // Handle Search action
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const privacyPolicy()),
+        );
+        break;
+      case 1:
+      // Handle Upload action
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => aboutUs()),
+        );
+        break;
+      case 2:
+      // Handle Copy action
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => aboutQuran()),
+        );
+        break;
+    }
   }
 
   Widget _buildCustomListItem(chapter) {

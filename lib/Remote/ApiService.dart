@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:alphabeticalquran/Models/QuranSearchResponse.dart';
 import 'package:alphabeticalquran/Models/VerseChapterModel.dart';
 import 'package:alphabeticalquran/Models/ChapterInfoModel.dart';
 import 'package:alphabeticalquran/Models/VerseInfoModel.dart';
@@ -87,4 +88,32 @@ class ApiService {
       throw Exception('Failed to load Arabic verse');
     }
   }
+
+  Future<QuranSearchResponse> fetchSearchResults(String query, int page) async {
+    final url = Uri.parse("$baseUrl/search?q=$query&page=$page&language=en");
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+      return QuranSearchResponse.fromJson(jsonResponse);
+    } else {
+      throw Exception("Failed to load search results");
+    }
+  }
+
+  Future<QuranSearchResponse> fetchSearchResultsU(String query, int page) async {
+    final url = Uri.parse("$baseUrl/search?q=$query&page=$page&language=ur");
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+      return QuranSearchResponse.fromJson(jsonResponse);
+    } else {
+      throw Exception("Failed to load search results");
+    }
+  }
+
+
+
+
 }

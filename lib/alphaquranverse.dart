@@ -1,6 +1,7 @@
 import 'package:alphabeticalquran/VerseDetail.dart';
 import 'package:flutter/material.dart';
 import 'Utils/FileReaderClass.dart';
+import 'package:flutter/services.dart';
 
 class AlphaQuranVerse extends StatefulWidget {
   final String chapterId;
@@ -114,6 +115,20 @@ class _AlphaQuranVerseState extends State<AlphaQuranVerse> {
           ),
         );
       },
+      onLongPress: () {
+        // Copy both verseID and verse to clipboard
+        Clipboard.setData(
+          ClipboardData(
+            text: '${modelPage.verseID} - ${modelPage.verse}',
+          ),
+        );
+        // Show a snackbar to notify the user
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Copied to clipboard!'),
+          ),
+        );
+      },
       child: Column(
         children: [
           Container(
@@ -122,7 +137,7 @@ class _AlphaQuranVerseState extends State<AlphaQuranVerse> {
             child: Row(
               children: [
                 Text(modelPage.verseID, style: TextStyle(color: Colors.black, fontSize: 16,fontFamily: 'elmessiri')),
-                SizedBox(width: 20),
+                SizedBox(width:20),
                 Expanded(
                   child: Text(modelPage.verse, style: TextStyle(color: Colors.black, fontSize: 16,fontFamily: 'elmessiri')), // Display the verse
                 ),

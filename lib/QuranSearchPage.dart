@@ -91,7 +91,6 @@ class _QuranSearchPageState extends State<QuranSearchPage> {
               itemBuilder: (context, index) {
                 String verseID = '';
                 String verse = '';
-
                 // Only process lines that start with '['
                 if (_filteredVerses[index].startsWith('[')) {
                   // Split the string by ']' to extract verseID and verse
@@ -101,7 +100,6 @@ class _QuranSearchPageState extends State<QuranSearchPage> {
                     verse = parts[1]; // The verse text after the ']'
                   }
                 }
-
                 // Only show non-empty verse items
                 if (verseID.isNotEmpty && verse.isNotEmpty) {
                   return Column(
@@ -151,7 +149,6 @@ class _QuranSearchPageState extends State<QuranSearchPage> {
                     ],
                   );
                 } else {
-                  // If line doesn't match criteria, return an empty container
                   return Container();
                 }
               },

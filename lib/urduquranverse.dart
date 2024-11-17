@@ -1,6 +1,6 @@
 import 'package:alphabeticalquran/Models/VerseChapterModel.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
 import 'Remote/ApiService.dart';
 
 class UrduQuranVerse extends StatefulWidget {
@@ -57,45 +57,66 @@ class _UrduQuranVerseState extends State<UrduQuranVerse> {
       ),
     );
   }
-}
+  Widget _buildCustomListItem(chapter , index) {
+    String chapterId = (index + 1).toString();
+    String ChapterName = chapter.replaceAll(RegExp(r'<[^>]*>'), '');
+    //String urduText = originalText.replaceAll(RegExp(r'<[^>]*>'), '');
 
-
-Widget _buildCustomListItem(chapter , index) {
-  String chapterId = (index + 1).toString();
-  String ChapterName = chapter.replaceAll(RegExp(r'<[^>]*>'), '');
-  //String urduText = originalText.replaceAll(RegExp(r'<[^>]*>'), '');
-
-  return Column(
-    children: [
-      Container(
-        color: Colors.white,
-        padding: EdgeInsets.all(8), // Added padding for better UI
-        child: Row(
-          children: [
-            SizedBox(width: 20),
-            Expanded(
-              child: Text(ChapterName,
-                  style: TextStyle(
+    return InkWell(
+      onLongPress: () {
+        // Copy both verseID and verse to clipboard
+        Clipboard.setData(
+          ClipboardData(
+            text: '${chapterId} - ${ChapterName}',
+          ),
+        );
+        // Show a snackbar to notify the user
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Copied to clipboard!'),
+          ),
+        );
+      },
+      child: Column(
+        children: [
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.all(8), // Added padding for better UI
+            child: Row(
+              children: [
+                SizedBox(width: 20),
+                Expanded(
+                  child: Text(
+                    ChapterName,
+                    textDirection: TextDirection.rtl, // Sets the text direction to Right-to-Left
+                    style: TextStyle(
                       color: Colors.black,
                       fontSize: 20,
-                      fontFamily: "jnr")), // Optional: display description
+                      fontFamily: "jnr", // Ensure this font supports Urdu
+                    ),
+                  ), // Optional: display description
+                ),
+                SizedBox(width: 15),
+                Text(chapterId,
+                    style: TextStyle(color: Colors.black, fontSize: 20)),
+                SizedBox(width: 15),
+              ],
             ),
-            SizedBox(width: 15),
-            Text(chapterId,
-                style: TextStyle(color: Colors.black, fontSize: 20)),
-            SizedBox(width: 15),
-          ],
-        ),
-      ),
-      Container(
-        padding: EdgeInsets.only(top: 5),
-        child: SizedBox(
-          height: 1,
-          child: Container(
-            color: Colors.black,
           ),
-        ),
+          Container(
+            padding: EdgeInsets.only(top: 5),
+            child: SizedBox(
+              height: 1,
+              child: Container(
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ],
       ),
-    ],
-  );
+    );
+  }
 }
+
+
+
