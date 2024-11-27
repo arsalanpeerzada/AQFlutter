@@ -12,7 +12,7 @@ class _privacyPolicyState extends State<privacyPolicy> {
   final controller = WebViewController()
     ..setJavaScriptMode(JavaScriptMode.disabled)
     ..loadRequest(
-        Uri.parse('https://www.teniqs.com/quranapp/privacypolicy.html'));
+        Uri.parse('https://alphabeticalquran.com/privacy-policyqu/'));
 
   @override
   Widget build(BuildContext context) {

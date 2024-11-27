@@ -312,21 +312,21 @@ class _MyHomePageState extends State<MyHomePage> {
                         }
                       },
                     ),
-                    SizedBox(width: 73),
+                    SizedBox(width: 88),
                     Container(
                       width: 1,
                       color: Color(0xFFFFDE93),
                     ),
-                    SizedBox(width: 73),
+                    SizedBox(width: 50),
                     ImageTextButton2(
-                      imagePath: 'images/instagram.png',
+                      imagePath: 'images/book.png',
                       // Update with your image path
-                      buttonText: 'Instagram',
+                      buttonText: 'Buy the \n HoneyBee Book',
                       onTap: () async {
                         // https://www.instagram.com/alphabeticalquran
 
                         const url =
-                            'https://www.instagram.com/alphabeticalquran';
+                            'https://thehoneybeebook.com/product/book/';
                         if (await canLaunchUrl(Uri.parse(url))) {
                         await launchUrl(Uri.parse(url));
                         } else {
@@ -346,7 +346,7 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(height: 20),
               Center(
                 child: Text(
-                  'Created By Syed Ammar Shah (author@jsdol.org)\nDeveloped by Teniqs.com',
+                  'Created By Syed Ammar Shah (author@sdol.org)\nDeveloped by Teniqs.com',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 12, color: fontGold,fontFamily: 'elmessiri'),
                 ),
@@ -447,6 +447,7 @@ class ImageTextButton2 extends StatelessWidget {
           // Space between image and text
           Text(
             buttonText,
+            textAlign:  TextAlign.center,
             style: TextStyle(
                 fontSize: 14, // Font size for the text
                 color: fontGold,
