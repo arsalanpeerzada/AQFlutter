@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:alphabeticalquran/Models/ChapterInfoModel.dart';
 import 'package:alphabeticalquran/Models/VerseInfoModel.dart';
 import 'package:alphabeticalquran/Models/VerseArabicModel.dart';
+import 'package:flutter/services.dart';
 import 'Remote/ApiService.dart';
 
 
@@ -81,17 +82,7 @@ class _VerseDetailState extends State<VerseDetail> {
               SectionTitle(title: 'Revelation Place:'),
               SectionContent(content: chapterInfo?.chapter.revelationPlace ?? 'Loading...'),
               SectionTitle(title: 'Verse:'),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
-                child: Text(
-                  verseArabic?.verses[0].textIndopak ?? 'Loading...',
-                  style: TextStyle(
-                    fontFamily: 'scheherazae',
-                    fontSize: 20,
-                  ),
-                  textAlign: TextAlign.right,
-                ),
-              ),
+              SectionContent2(content: verseArabic?.verses[0].textIndopak ?? 'Loading...'),
               SectionTitle(title: 'Translation:'),
               SectionContent(content: verseInfo?.verse.translations[1].text?? 'Loading...'),
               SectionTitle(title: 'Translation Urdu:'),
@@ -140,17 +131,55 @@ class SectionTitle extends StatelessWidget {
 class SectionContent extends StatelessWidget {
   final String content;
 
-  const SectionContent({required this.content});
+  const SectionContent({super.key, required this.content});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 20),
-      child: Text(
-        content,
-        style: TextStyle(
-          fontSize: 20,
-          fontFamily: 'elmessiri',
+    return GestureDetector(
+      onLongPress: () {
+        Clipboard.setData(ClipboardData(text: content));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Copied to clipboard')),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 20),
+        child: Text(
+          content,
+          style: const TextStyle(
+            fontSize: 20,
+            fontFamily: 'elmessiri',
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+class SectionContent2 extends StatelessWidget {
+  final String content;
+
+  const SectionContent2({super.key, required this.content});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onLongPress: () {
+        Clipboard.setData(ClipboardData(text: content));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Copied to clipboard')),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 20),
+        child: Text(
+          content,
+          style: const TextStyle(
+            fontSize: 20,
+            fontFamily: 'scheherazae',
+          ),
+          textAlign: TextAlign.right,
         ),
       ),
     );

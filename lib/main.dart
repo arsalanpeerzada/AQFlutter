@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         isLoading = false;
         // Optionally, handle the error more gracefully and inform the user
-        print('Failed to fetch data: $e');
+        //print('Failed to fetch data: $e');
       });
     }
   }
@@ -114,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           if (snapshot.connectionState == ConnectionState.waiting) {
                             return CircularProgressIndicator();
                           } else if (snapshot.hasError) {
-                            return Text('Error: ${snapshot.error}');
+                            return Text('');
                           } else {
                             return Text('${snapshot.data}',style: TextStyle(color: fontGold),);
                           }
