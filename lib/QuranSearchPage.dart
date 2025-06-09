@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'Utils/FileReaderClass.dart';
 import 'VerseDetail.dart';
+
 class QuranSearchPage extends StatefulWidget {
   @override
   _QuranSearchPageState createState() => _QuranSearchPageState();
@@ -14,6 +16,7 @@ class _QuranSearchPageState extends State<QuranSearchPage> {
   List<String> _filteredVerses = [];
   TextEditingController _searchController = TextEditingController();
   late FileReaderClass fileReaderClass;
+
   @override
   void initState() {
     super.initState();
@@ -31,7 +34,7 @@ class _QuranSearchPageState extends State<QuranSearchPage> {
   Future<void> _loadQuranData() async {
     // Load the Quran.txt file from the assets
     List<String> data = await fileReaderClass.readFile('topicverse.txt');
-    List<String> dddd= data;
+    List<String> dddd = data;
     setState(() {
       // Split the content by new lines or by your custom delimiter
       _allVerses = (data);
@@ -59,9 +62,11 @@ class _QuranSearchPageState extends State<QuranSearchPage> {
         backgroundColor: Color(0xFF003F38),
         centerTitle: false,
         title: Text("Search"),
-        titleTextStyle: TextStyle(fontFamily: 'elmessiri',color: Colors.white,fontSize: 23),
+        titleTextStyle: TextStyle(
+            fontFamily: 'elmessiri', color: Colors.white, fontSize: 23),
         iconTheme: IconThemeData(
-          color: Colors.white, // Set your desired color for the back button here
+          color:
+              Colors.white, // Set your desired color for the back button here
         ),
       ),
       body: Column(
@@ -78,8 +83,18 @@ class _QuranSearchPageState extends State<QuranSearchPage> {
                     suffixIcon: Icon(Icons.search),
                   ),
                 ),
-                SizedBox(height: 10,),
-                Align(alignment: Alignment.centerRight, child: Text("${_filteredVerses.length} items found",style: TextStyle(fontFamily: 'elmessiri',color: Colors.black,fontSize: 16),))
+                SizedBox(
+                  height: 10,
+                ),
+                Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      "${_filteredVerses.length} items found",
+                      style: TextStyle(
+                          fontFamily: 'elmessiri',
+                          color: Colors.black,
+                          fontSize: 16),
+                    ))
               ],
             ),
           ),
@@ -87,72 +102,83 @@ class _QuranSearchPageState extends State<QuranSearchPage> {
             child: _filteredVerses.isEmpty
                 ? Center(child: Text('No results found'))
                 : ListView.builder(
-              itemCount: _filteredVerses.length,
-              itemBuilder: (context, index) {
-                String verseID = '';
-                String verse = '';
-                // Only process lines that start with '['
-                if (_filteredVerses[index].startsWith('[')) {
-                  // Split the string by ']' to extract verseID and verse
-                  List<String> parts = _filteredVerses[index].split(']');
-                  if (parts.length > 1) {
-                    verseID = parts[0].replaceAll('[', ''); // Extract verseID and remove '['
-                    verse = parts[1]; // The verse text after the ']'
-                  }
-                }
-                // Only show non-empty verse items
-                if (verseID.isNotEmpty && verse.isNotEmpty) {
-                  return Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                        child: InkWell(
-                          onTap: (){
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => VerseDetail(verseID: verseID),
-                              ),
-                            );
-                          },
-                          child: Row(
-                            children: [
-                              Text(
-                                verseID,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                  fontFamily: 'elmessiri',
+                    itemCount: _filteredVerses.length,
+                    itemBuilder: (context, index) {
+                      String verseID = '';
+                      String verse = '';
+                      // Only process lines that start with '['
+                      if (_filteredVerses[index].startsWith('[')) {
+                        // Split the string by ']' to extract verseID and verse
+                        List<String> parts = _filteredVerses[index].split(']');
+                        if (parts.length > 1) {
+                          verseID = parts[0].replaceAll(
+                              '[', ''); // Extract verseID and remove '['
+                          verse = parts[1]; // The verse text after the ']'
+                        }
+                      }
+                      // Only show non-empty verse items
+                      if (verseID.isNotEmpty && verse.isNotEmpty) {
+                        return Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 8.0, horizontal: 16.0),
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          VerseDetail(verseID: verseID),
+                                    ),
+                                  );
+                                },
+                                onLongPress: () {
+                                  // Copy both verseID and verse to clipboard
+                                  Clipboard.setData(
+                                    ClipboardData(
+                                      text: '$verseID - $verse',
+                                    ),
+                                  );
+                                },
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      verseID,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                        fontFamily: 'elmessiri',
+                                      ),
+                                    ),
+                                    SizedBox(width: 20),
+                                    Expanded(
+                                      child: Text(
+                                        verse,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                          fontFamily: 'elmessiri',
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              SizedBox(width: 20),
-                              Expanded(
-                                child: Text(
-                                  verse,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontFamily: 'elmessiri',
-                                  ),
-                                ),
+                            ),
+                            SizedBox(
+                              height: 1,
+                              child: Container(
+                                color: Colors.black,
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 1,
-                        child: Container(
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
-                  );
-                } else {
-                  return Container();
-                }
-              },
-            ),
+                            ),
+                          ],
+                        );
+                      } else {
+                        return Container();
+                      }
+                    },
+                  ),
           ),
         ],
       ),

@@ -2,6 +2,7 @@ import 'package:alphabeticalquran/Models/QuranSearchResponse.dart';
 import 'package:alphabeticalquran/Remote/ApiService.dart';
 import 'package:alphabeticalquran/VerseDetail.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class QuranSearchPageE extends StatefulWidget {
   @override
@@ -143,6 +144,13 @@ class _QuranSearchPageState extends State<QuranSearchPageE> {
                                   MaterialPageRoute(
                                     builder: (context) =>
                                         VerseDetail(verseID: result.verseKey),
+                                  ),
+                                );
+                              },
+                              onLongPress: () {
+                                Clipboard.setData(
+                                  ClipboardData(
+                                    text: '${result.verseKey} - $resultEng',
                                   ),
                                 );
                               },

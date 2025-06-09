@@ -2,6 +2,7 @@ import 'package:alphabeticalquran/Models/QuranSearchResponse.dart';
 import 'package:alphabeticalquran/Remote/ApiService.dart';
 import 'package:alphabeticalquran/VerseDetail.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class QuranSearchPageU extends StatefulWidget {
   @override
@@ -26,7 +27,7 @@ class _QuranSearchPageState extends State<QuranSearchPageU> {
 
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent &&
+              _scrollController.position.maxScrollExtent &&
           !_isLoading &&
           _hasMore) {
         _fetchResults();
@@ -83,7 +84,7 @@ class _QuranSearchPageState extends State<QuranSearchPageU> {
             fontFamily: 'elmessiri', color: Colors.white, fontSize: 23),
         iconTheme: IconThemeData(
           color:
-          Colors.white, // Set your desired color for the back button here
+              Colors.white, // Set your desired color for the back button here
         ),
       ),
       body: Column(
@@ -118,69 +119,76 @@ class _QuranSearchPageState extends State<QuranSearchPageU> {
             child: _results.isEmpty && _isLoading
                 ? Center(child: CircularProgressIndicator())
                 : ListView.builder(
-              controller: _scrollController,
-              itemCount: _results.length + (_hasMore ? 1 : 0),
-              itemBuilder: (context, index) {
-                if (index == _results.length) {
-                  return Center(child: CircularProgressIndicator());
-                }
+                    controller: _scrollController,
+                    itemCount: _results.length + (_hasMore ? 1 : 0),
+                    itemBuilder: (context, index) {
+                      if (index == _results.length) {
+                        return Center(child: CircularProgressIndicator());
+                      }
 
-                final result = _results[index];
+                      final result = _results[index];
 
-                String resultEng = result.translations.isNotEmpty
-                    ? result.translations[0].text
-                    .replaceAll(RegExp(r'<[^>]*>'), '')
-                    : "No translation available";
-                return Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 16.0),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  VerseDetail(verseID: result.verseKey),
-                            ),
-                          );
-                        },
-                        child: Row(
-                          children: [
-                            Text(
-                              result.verseKey,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontFamily: 'elmessiri',
+                      String resultEng = result.translations.isNotEmpty
+                          ? result.translations[0].text
+                              .replaceAll(RegExp(r'<[^>]*>'), '')
+                          : "No translation available";
+                      return Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 16.0),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        VerseDetail(verseID: result.verseKey),
+                                  ),
+                                );
+                              },
+                              onLongPress: () {
+                                Clipboard.setData(
+                                  ClipboardData(
+                                    text: '${result.verseKey} - $resultEng',
+                                  ),
+                                );
+                              },
+                              child: Row(
+                                children: [
+                                  Text(
+                                    result.verseKey,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontFamily: 'elmessiri',
+                                    ),
+                                  ),
+                                  SizedBox(width: 20),
+                                  Expanded(
+                                    child: Text(
+                                      resultEng,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                        fontFamily: 'elmessiri',
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            SizedBox(width: 20),
-                            Expanded(
-                              child: Text(
-                                resultEng,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                  fontFamily: 'elmessiri',
-                                ),
-                              ),
+                          ),
+                          SizedBox(
+                            height: 1,
+                            child: Container(
+                              color: Colors.black,
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 1,
-                      child: Container(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
           )
         ],
       ),
