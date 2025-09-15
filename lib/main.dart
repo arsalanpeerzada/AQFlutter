@@ -107,7 +107,6 @@ class _MyHomePageState extends State<MyHomePage> {
                           fontWeight: FontWeight.bold),
                     ),
                     Center(
-
                       child: FutureBuilder<String>(
                         future: fetchDateConversion(),
                         builder: (context, snapshot) {
@@ -116,7 +115,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           } else if (snapshot.hasError) {
                             return Text('');
                           } else {
-                            return Text('${snapshot.data}',style: TextStyle(color: fontGold),);
+                            return Text('${snapshot.data}',style:
+                            TextStyle(color: fontGold),);
                           }
                         },
                       ),

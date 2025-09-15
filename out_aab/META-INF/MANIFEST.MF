@@ -1,0 +1,354 @@
+Manifest-Version: 1.0
+Built-By: Signflinger
+Created-By: Signflinger
+
+Name: BUNDLE-METADATA/com.android.tools.build.gradle/app-metadata.prop
+ erties
+SHA-256-Digest: sNI06QFj6nwqINm+jAUsWLRKablTedg7M1AuynNZ2oU=
+
+Name: BUNDLE-METADATA/com.android.tools.build.libraries/dependencies.p
+ b
+SHA-256-Digest: FinPBTHMdJt2cuiPhtEilscJAsVf9o73AHJezxCUo8E=
+
+Name: BUNDLE-METADATA/com.android.tools.build.obfuscation/proguard.map
+SHA-256-Digest: I7yK4+I2t4oQjblsexsASTDvydOsYsgXVFIGNZbVWxU=
+
+Name: BUNDLE-METADATA/com.android.tools.build.profiles/baseline.prof
+SHA-256-Digest: XBt/FMsbGnnYeFB5oI6qTXfq7DL+f0UBx+SXZFE4ksw=
+
+Name: BUNDLE-METADATA/com.android.tools.build.profiles/baseline.profm
+SHA-256-Digest: 6qyu9S5ldVpLdzwhciHjPxILzv7L/k2KXwKQKlPBpqw=
+
+Name: BUNDLE-METADATA/com.android.tools/r8.json
+SHA-256-Digest: Fw1AUfE+O/gL6o8nFRpL5O+iGU7b7qvE7PvqTGBFOZw=
+
+Name: BundleConfig.pb
+SHA-256-Digest: w1f4QHzFAFAOEZUObNs5H56P2bJv/WePK6YsoKqeyWI=
+
+Name: base/assets.pb
+SHA-256-Digest: oUPZ+pgg2HLT+vMfIVr7ErUC/+6mn3lLq/UiPgOw+yk=
+
+Name: base/assets/flutter_assets/AssetManifest.bin
+SHA-256-Digest: sR7fLjkxNsIbYkXZRLHjxiJ+7B5Y2bzYNFW5TkQvAXA=
+
+Name: base/assets/flutter_assets/AssetManifest.json
+SHA-256-Digest: 6FPmFJ5JLY3+cTDAhsQ4DQI0KY5oWdUyzilSk8G1/WM=
+
+Name: base/assets/flutter_assets/FontManifest.json
+SHA-256-Digest: DsTkMOXSGMvFYiBPFIf1ToltBqhAgmAr1TGBe92q+fg=
+
+Name: base/assets/flutter_assets/NOTICES.Z
+SHA-256-Digest: 40VgTex+CMmTXX6ufg5jJ3rZ/SiDLfJ+lvBZjXFYfGM=
+
+Name: base/assets/flutter_assets/assets/quran.pdf
+SHA-256-Digest: iOj+gCcEkFRXctHlXkBW5jzA+gzDwxLZlbVprsE8QAY=
+
+Name: base/assets/flutter_assets/assets/topics.txt
+SHA-256-Digest: q2SRGrmLp+hYcXsCmendr+6U5sjCL5AU6Aw3q5b1Vi0=
+
+Name: base/assets/flutter_assets/assets/topicverse.txt
+SHA-256-Digest: cw/cMwmcnkkvm0H/22jKRnXlxTP24JoNq/gudHY9dqs=
+
+Name: base/assets/flutter_assets/font/amiri.ttf
+SHA-256-Digest: waA8fWzRtZEFBBk1yjaNebgu+Uu6rErvKvU/zeyc5rU=
+
+Name: base/assets/flutter_assets/font/elmessiri.ttf
+SHA-256-Digest: 3znjyxFWyqeP8/qYV+n+pmFVoq/1szAksUgOzgs4x+w=
+
+Name: base/assets/flutter_assets/font/jnkasheeda.ttf
+SHA-256-Digest: LKHbAUh6pNydYMFw6DSeQ61GULQOSof9QPay6YYUuMA=
+
+Name: base/assets/flutter_assets/font/jnr.ttf
+SHA-256-Digest: OcVPFkampPaECPOiZADkV8seUiJsKE2MSrNqM2NSDg8=
+
+Name: base/assets/flutter_assets/font/ramandan.ttf
+SHA-256-Digest: 569pKhVFsKHwbykM/SHEK/+GPlbSyPgGK8RO0M3OQG0=
+
+Name: base/assets/flutter_assets/font/scheherazae.ttf
+SHA-256-Digest: RWnJhGJyWiQgzUUXfuAShgVjz2Sov+6wtOLTshiGwFk=
+
+Name: base/assets/flutter_assets/fonts/MaterialIcons-Regular.otf
+SHA-256-Digest: f/1uscCYv4yx1l/s+7bE4wV/9OtmGr6KoxHiG0niGYg=
+
+Name: base/assets/flutter_assets/images/Capture.jpg
+SHA-256-Digest: Pa5F1HkZWFQZgQtFu5dym0zpaLbOTMVzeH9ut9s5UsQ=
+
+Name: base/assets/flutter_assets/images/book.png
+SHA-256-Digest: KkmK8erpPC9mA/5N8vumZk8O/HAMcEQd0fHRPy6coFs=
+
+Name: base/assets/flutter_assets/images/facebook.png
+SHA-256-Digest: DQFsSduj+itYVK6nehhV3/7oQD7BVY8IRvzbPb1pO7s=
+
+Name: base/assets/flutter_assets/images/header.png
+SHA-256-Digest: Ef+cTaCvwmq3umY4TEzKf4TDYMUBn0BNPBmwsnWuFLw=
+
+Name: base/assets/flutter_assets/images/headeredit.png
+SHA-256-Digest: OYg461eSFRKDKqlWQdxoUAEMwJPvgo+dxt5fUeYOI5s=
+
+Name: base/assets/flutter_assets/images/instagram.png
+SHA-256-Digest: R/LenafAKGEA7Y/qTgO6gNQ6rBQqbHQhYTwgXWP3xI4=
+
+Name: base/assets/flutter_assets/images/prayer.png
+SHA-256-Digest: rLVyaBSMKdQOmuoVu4uAGUShv+zhMF15XMT0DmG4CXY=
+
+Name: base/assets/flutter_assets/images/qbook.png
+SHA-256-Digest: eQ4qhxuEQvyGRvnEDKWFsECMIVvFJAofBFZDe5ZkYZ8=
+
+Name: base/assets/flutter_assets/images/splash.jpg
+SHA-256-Digest: 8oI+8Nb447yNfqTBmMAivNBxM5YeVIEJkjZ96MSiHnM=
+
+Name: base/assets/flutter_assets/packages/cupertino_icons/assets/Cuper
+ tinoIcons.ttf
+SHA-256-Digest: Z8RP6Rg7AC553ef2l34piGYcmj5KPF/OloeH79vtgjw=
+
+Name: base/assets/flutter_assets/shaders/ink_sparkle.frag
+SHA-256-Digest: OqCUJNHcOR/Vmpc17+mG/0MwK15bwxCSav4RxoYmw7I=
+
+Name: base/dex/classes.dex
+SHA-256-Digest: PNRfv93weDVj3/cdzhe4n94Mf3rISIjrzWcdycs1nOA=
+
+Name: base/lib/arm64-v8a/libapp.so
+SHA-256-Digest: /u2qxd52BEl3WB9ykPAu3GzWFFgoZ872f/ajre60sNU=
+
+Name: base/lib/arm64-v8a/libc++_shared.so
+SHA-256-Digest: KyHQfMTdzF8N6Rk39Lwf89CZ2MTlldq/u6DH9RsJdEw=
+
+Name: base/lib/arm64-v8a/libflutter.so
+SHA-256-Digest: T4e/jR45DCmAOTXlylMHJPM9fFYVE4wi/FDfPHxH9SQ=
+
+Name: base/lib/arm64-v8a/libjniPdfium.so
+SHA-256-Digest: +cojivyBkCS0eILwlGa6/aA6USjkQuAH5jm5jn5Oq6k=
+
+Name: base/lib/arm64-v8a/libmodft2.so
+SHA-256-Digest: 2iI2k32dYYp8kXcYzJitAeBF84cu/WluHh/EDTNZul4=
+
+Name: base/lib/arm64-v8a/libmodpdfium.so
+SHA-256-Digest: /4PPcxyjZJMh0YjO1+FM1NB/X/9o77SHkhVeEjDi1PM=
+
+Name: base/lib/arm64-v8a/libmodpng.so
+SHA-256-Digest: qR/vHVj86eehok2WTkQq743UQtA7dIMjFmyreyuMNvE=
+
+Name: base/lib/armeabi-v7a/libapp.so
+SHA-256-Digest: eJdG5KEFYFQi1EB6A6MykG62Bbca8j9nepPLBP5tx2w=
+
+Name: base/lib/armeabi-v7a/libc++_shared.so
+SHA-256-Digest: 509+jGxhWWg/Kf+gAQzk5Tt8OHtMKN8Dxa3NXywwbdI=
+
+Name: base/lib/armeabi-v7a/libflutter.so
+SHA-256-Digest: FWqyUmRNTuILm6CWJ/FfOw5qlbvsJKu91J4yEpjCEVY=
+
+Name: base/lib/armeabi-v7a/libjniPdfium.so
+SHA-256-Digest: saCje74GGsQT+sU9T72P5pSmOJbtc4jxhx40Gspw2YU=
+
+Name: base/lib/armeabi-v7a/libmodft2.so
+SHA-256-Digest: yHY0FpLtS7zytxKDKQGWyN6NAaHSMYwQCMHcq38Yr9I=
+
+Name: base/lib/armeabi-v7a/libmodpdfium.so
+SHA-256-Digest: lGmlUMNj69YjrViGvQExQm6JRTVIcQwp+C02aySVCQg=
+
+Name: base/lib/armeabi-v7a/libmodpng.so
+SHA-256-Digest: +aN7WbgncbV3iKQiR4uloHM67BFfa5y7x0knv8ClUOk=
+
+Name: base/lib/x86/libc++_shared.so
+SHA-256-Digest: eCckuJnRltNFpukcbYz8iKLhrxkzzZRoGVLAtL0cOuA=
+
+Name: base/lib/x86/libjniPdfium.so
+SHA-256-Digest: Oq6UpcaFj/GZGyvB4B6UwTZtUOVPn8n1UDg4KYbeRKY=
+
+Name: base/lib/x86/libmodft2.so
+SHA-256-Digest: DmThTFirmzTQ9ec8M2Lhg8lfcRx8zxpvX/Cv0CFYNMU=
+
+Name: base/lib/x86/libmodpdfium.so
+SHA-256-Digest: DfDknvdT8kC+dIsHac7EhBBigqwpS1nQ8XorvDLfAT0=
+
+Name: base/lib/x86/libmodpng.so
+SHA-256-Digest: 5V0liVIT8pxH6+xbQa/iYBC1/Rkhkdmc2kpNblr7hW4=
+
+Name: base/lib/x86_64/libapp.so
+SHA-256-Digest: QBuDiS37m4jq4zJf6pc8kXbA3guh2PtYrhVdNflYZj0=
+
+Name: base/lib/x86_64/libc++_shared.so
+SHA-256-Digest: /HgYWWu2131tpFOIIfLXw9lcqgrarGuQb0KPPP7SA3M=
+
+Name: base/lib/x86_64/libflutter.so
+SHA-256-Digest: g6dJhsQJYgHyernPbW0CW9+qqbGeVbt8pAdtt6/u6hI=
+
+Name: base/lib/x86_64/libjniPdfium.so
+SHA-256-Digest: JZKRTK1q+epts4HK4N3ZhvaA2W5ZmKAh9SthUfbMO74=
+
+Name: base/lib/x86_64/libmodft2.so
+SHA-256-Digest: H393Ki7KHySDpT+ZPftu+dwTr4PPdyU3wb8ulEvh59g=
+
+Name: base/lib/x86_64/libmodpdfium.so
+SHA-256-Digest: kxRjVZawFieoLNE1Z09niOm0wMuDc3qP9WbJshKMOXY=
+
+Name: base/lib/x86_64/libmodpng.so
+SHA-256-Digest: /fGJl6sRnGcwkSwgEbiHnSls0xDEj/uXrhtncZhLJJc=
+
+Name: base/manifest/AndroidManifest.xml
+SHA-256-Digest: 5Y463RkhelW61MkizrfMOKYhmjFqEcfaBBIKBdg2wyY=
+
+Name: base/native.pb
+SHA-256-Digest: uGBj9sUJdpm7xXvQ0qLUafOvEfVU7DR9n4XYYRvAlvI=
+
+Name: base/res/drawable-v21/launch_background.xml
+SHA-256-Digest: e2MgJejWOekwl3RKKyv/EtA4KT4WnsA6EQonyxzTMqY=
+
+Name: base/res/mipmap-hdpi-v4/ic_launcher.png
+SHA-256-Digest: KhXNJIetcxfUquQXaUm4JpBJY6Bk6smtx56Ct/OQCFQ=
+
+Name: base/res/mipmap-mdpi-v4/ic_launcher.png
+SHA-256-Digest: RzusdNc6OFIiXZ9wNjC/HKEEXzA+9nptwJC9YvXY9Mo=
+
+Name: base/res/mipmap-xhdpi-v4/ic_launcher.png
+SHA-256-Digest: GrcB1FW8F5io4NqXZ36F50rguiqZAm5wvIdGR4EE84w=
+
+Name: base/res/mipmap-xxhdpi-v4/ic_launcher.png
+SHA-256-Digest: 5YW9u98FDh09bRf3K/LG1lteUF0pKXtLSAOIgKyuSWI=
+
+Name: base/res/mipmap-xxxhdpi-v4/ic_launcher.png
+SHA-256-Digest: ed1hGF6H8d8Vfb74hRwHPhF3uqQDOGVhbdIxdFbyRcc=
+
+Name: base/res/xml/image_share_filepaths.xml
+SHA-256-Digest: siQZsQNCzN0VqeGJITcqC70ACy8hpRvgxOj0Z2GW7sg=
+
+Name: base/resources.pb
+SHA-256-Digest: vEHHOfNY46A/QBUuoXLMdcZ8RfP+ODv+3iCeS1ZKIZk=
+
+Name: base/root/DebugProbesKt.bin
+SHA-256-Digest: rooILdYJMTg1upPD70eaOvmQOXfXvcgd9Fu9IJ7H0No=
+
+Name: base/root/META-INF/androidx.activity_activity.version
+SHA-256-Digest: Jc7Jc50yGOSKzF2MPUMz4dYkEhxberO83ccdD6ATS4M=
+
+Name: base/root/META-INF/androidx.annotation_annotation-experimental.v
+ ersion
+SHA-256-Digest: fQcrSFJrAjlQ5MSNsB6MJzVUpkARGfVpHnWJupvGXZ0=
+
+Name: base/root/META-INF/androidx.arch.core_core-runtime.version
+SHA-256-Digest: G3xgY3AYhTTaxVYfuispiAk4KWl/zp5uiDLpKR0k7QA=
+
+Name: base/root/META-INF/androidx.browser_browser.version
+SHA-256-Digest: PrHvlLWJDKcnFYsQYUJoXIczsKzlvLTPPwrBT58GQ/Q=
+
+Name: base/root/META-INF/androidx.core_core-ktx.version
+SHA-256-Digest: ygvHnEzeCtZOHsnfKIJCUZe1uoVwSkrGvWf4+Zk26yU=
+
+Name: base/root/META-INF/androidx.core_core.version
+SHA-256-Digest: ygvHnEzeCtZOHsnfKIJCUZe1uoVwSkrGvWf4+Zk26yU=
+
+Name: base/root/META-INF/androidx.customview_customview.version
+SHA-256-Digest: WYVJhIUxBN9cNT4vaBoV/HkkdC+aLkaMKa8kjc5FzgM=
+
+Name: base/root/META-INF/androidx.fragment_fragment.version
+SHA-256-Digest: JJGCoBFkuBpfevh+XFzb0zRKgKembfymJM7PsVAbJCA=
+
+Name: base/root/META-INF/androidx.interpolator_interpolator.version
+SHA-256-Digest: WYVJhIUxBN9cNT4vaBoV/HkkdC+aLkaMKa8kjc5FzgM=
+
+Name: base/root/META-INF/androidx.lifecycle_lifecycle-livedata-core-kt
+ x.version
+SHA-256-Digest: NiFI13Ia1KG7ZJgf+NYE739NIiZ+qIRQQvVPkJQPJP0=
+
+Name: base/root/META-INF/androidx.lifecycle_lifecycle-livedata-core.ve
+ rsion
+SHA-256-Digest: NiFI13Ia1KG7ZJgf+NYE739NIiZ+qIRQQvVPkJQPJP0=
+
+Name: base/root/META-INF/androidx.lifecycle_lifecycle-livedata.version
+SHA-256-Digest: NiFI13Ia1KG7ZJgf+NYE739NIiZ+qIRQQvVPkJQPJP0=
+
+Name: base/root/META-INF/androidx.lifecycle_lifecycle-process.version
+SHA-256-Digest: NiFI13Ia1KG7ZJgf+NYE739NIiZ+qIRQQvVPkJQPJP0=
+
+Name: base/root/META-INF/androidx.lifecycle_lifecycle-runtime.version
+SHA-256-Digest: NiFI13Ia1KG7ZJgf+NYE739NIiZ+qIRQQvVPkJQPJP0=
+
+Name: base/root/META-INF/androidx.lifecycle_lifecycle-viewmodel-saveds
+ tate.version
+SHA-256-Digest: NiFI13Ia1KG7ZJgf+NYE739NIiZ+qIRQQvVPkJQPJP0=
+
+Name: base/root/META-INF/androidx.lifecycle_lifecycle-viewmodel.versio
+ n
+SHA-256-Digest: NiFI13Ia1KG7ZJgf+NYE739NIiZ+qIRQQvVPkJQPJP0=
+
+Name: base/root/META-INF/androidx.loader_loader.version
+SHA-256-Digest: WYVJhIUxBN9cNT4vaBoV/HkkdC+aLkaMKa8kjc5FzgM=
+
+Name: base/root/META-INF/androidx.profileinstaller_profileinstaller.ve
+ rsion
+SHA-256-Digest: EOLhF7AVI4kconGmFa426dXlI0j9fWQvZnJ2AsG43L4=
+
+Name: base/root/META-INF/androidx.savedstate_savedstate.version
+SHA-256-Digest: bPTghLR/M8mwLveSedFXgzho+PcFFBaadovjU+4yj+o=
+
+Name: base/root/META-INF/androidx.startup_startup-runtime.version
+SHA-256-Digest: zFL2eISLgUNzdXtGA4O/YZYOSUPCA3Na3eCjULPlCYk=
+
+Name: base/root/META-INF/androidx.tracing_tracing.version
+SHA-256-Digest: HltRzeUVOWqfp2KQnPjKZYTMxWSzJdLuvup2F1/pXE0=
+
+Name: base/root/META-INF/androidx.versionedparcelable_versionedparcela
+ ble.version
+SHA-256-Digest: zFL2eISLgUNzdXtGA4O/YZYOSUPCA3Na3eCjULPlCYk=
+
+Name: base/root/META-INF/androidx.viewpager_viewpager.version
+SHA-256-Digest: WYVJhIUxBN9cNT4vaBoV/HkkdC+aLkaMKa8kjc5FzgM=
+
+Name: base/root/META-INF/androidx.webkit_webkit.version
+SHA-256-Digest: 1yN5jyQ2tGhy7poBJjLW9WAquSl74FeAp5uilzP4pTI=
+
+Name: base/root/META-INF/androidx.window.extensions.core_core.version
+SHA-256-Digest: WYVJhIUxBN9cNT4vaBoV/HkkdC+aLkaMKa8kjc5FzgM=
+
+Name: base/root/META-INF/androidx.window_window-java.version
+SHA-256-Digest: HltRzeUVOWqfp2KQnPjKZYTMxWSzJdLuvup2F1/pXE0=
+
+Name: base/root/META-INF/androidx.window_window.version
+SHA-256-Digest: HltRzeUVOWqfp2KQnPjKZYTMxWSzJdLuvup2F1/pXE0=
+
+Name: base/root/META-INF/androidx/annotation/annotation/LICENSE.txt
+SHA-256-Digest: gJ+h7SFFD1mCfR6a7HILvEtodDT6Iig8bLXdgqR6ucA=
+
+Name: base/root/META-INF/com/android/build/gradle/app-metadata.propert
+ ies
+SHA-256-Digest: sNI06QFj6nwqINm+jAUsWLRKablTedg7M1AuynNZ2oU=
+
+Name: base/root/META-INF/kotlinx_coroutines_android.version
+SHA-256-Digest: GLo805azBMO/br10Plrb2bm1sqQvVT5/dOC8+1SVoh8=
+
+Name: base/root/META-INF/kotlinx_coroutines_core.version
+SHA-256-Digest: GLo805azBMO/br10Plrb2bm1sqQvVT5/dOC8+1SVoh8=
+
+Name: base/root/META-INF/services/C0.B
+SHA-256-Digest: 5yLbp/Dnoc5IAcI29nd0mE8Anf02RtNzqMByGijJCKE=
+
+Name: base/root/META-INF/services/H0.t
+SHA-256-Digest: H/OgyQv+LQ/nAjP9GgXqY14waqukfBtAc73V81lIX4U=
+
+Name: base/root/META-INF/version-control-info.textproto
+SHA-256-Digest: ONN3r6drY2Tlv1Uc9P/sGogaRhAqAEf1I/vxSODfaSg=
+
+Name: base/root/kotlin-tooling-metadata.json
+SHA-256-Digest: 7wO0U3G75OPXjk5//BUtahcyAJaMsvEyJjlCw8VjXEY=
+
+Name: base/root/kotlin/annotation/annotation.kotlin_builtins
+SHA-256-Digest: 5e7KY/TFY1Zg0wZXek4wkmgzUTy0fiDs6prmu8MSWZU=
+
+Name: base/root/kotlin/collections/collections.kotlin_builtins
+SHA-256-Digest: U5uFwkA/bvBjgWGtmd97ESVkEulBEzXtLqOTGj79fHY=
+
+Name: base/root/kotlin/coroutines/coroutines.kotlin_builtins
+SHA-256-Digest: WabWMrip9duibyponDhl4ZU1HffDwIqhZp/g35+euIM=
+
+Name: base/root/kotlin/internal/internal.kotlin_builtins
+SHA-256-Digest: x2two9sezL5C6pGlNmfXZh7fxhVAnT1uV0tYQ7HioF4=
+
+Name: base/root/kotlin/kotlin.kotlin_builtins
+SHA-256-Digest: fyXmgtn4MncRKz25rfwdV33B0By/B2R39BYYD2eUUzw=
+
+Name: base/root/kotlin/ranges/ranges.kotlin_builtins
+SHA-256-Digest: K4d14aq9SpXb/EzZwMyf8DBYIC39nNfuWHW6Ppcg8ig=
+
+Name: base/root/kotlin/reflect/reflect.kotlin_builtins
+SHA-256-Digest: H1IQypQBSLglLVQguATSVotLvhGGTwKQp3xXYnfamFc=
+
