@@ -16,7 +16,7 @@ Bounties_Bestowed_By_Allah_versus_Ungratefulness_of_Man:236
 Calender_–_The_Islamic_Time:5
 Clothing_In_Islam:4
 Dawood_-Prophet:19
-Death_and_Martyrdom:60
+Death_and_Martyrdom:93
 Disbelievers_The:546
 Duwas_From_Quran:46
 Fasting_and_The_Month_Of_Ramadan:16
@@ -66,7 +66,7 @@ Qisas_–_The_Settlement:8
 Quraish_–_The_Tribe:2
 Quran_–_The_Divine_Book:232
 Romans_–_The_Prophecy:1
-Sahabi_–_The_Companions_Of_Prophet_Muhammad:62
+Sahabi_–_The_Companions_Of_Prophet_Muhammad:97
 Salih_-Prophet:75
 Scholars_Who_Forge_A_Lie:12
 Sciences_of_Creation_and_Universe:186
