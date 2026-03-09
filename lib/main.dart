@@ -6,12 +6,18 @@ import 'package:alphabeticalquran/arabicquran.dart';
 import 'package:alphabeticalquran/englishquran.dart';
 import 'package:alphabeticalquran/splach_screen.dart';
 import 'package:alphabeticalquran/urduquran.dart';
+import 'package:alphabeticalquran/Utils/FacebookAnalyticsService.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Facebook App Events
+  await FacebookAnalyticsService().initialize();
+
   runApp(const MyApp());
 }
 
@@ -151,6 +157,9 @@ class _MyHomePageState extends State<MyHomePage> {
               IntrinsicHeight(
                 child: InkWell(
                   onTap: () {
+                    // Log Facebook Analytics event
+                    FacebookAnalyticsService().logViewAlphabeticalQuran();
+
                     // Define the action to perform when the widget is clicked
                     Navigator.push(
                       context,
@@ -220,6 +229,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       // Update with your image path
                       buttonText: 'Arabic Quran',
                       onTap: () {
+                        FacebookAnalyticsService().logViewArabicQuran();
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => const ArabicQuran()),
@@ -237,6 +247,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       // Update with your image path
                       buttonText: 'English Quran',
                       onTap: () {
+                        FacebookAnalyticsService().logViewEnglishQuran();
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => const EnglishQuran()),
@@ -261,6 +272,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       // Update with your image path
                       buttonText: 'Urdu Quran',
                       onTap: () {
+                        FacebookAnalyticsService().logViewUrduQuran();
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => const UrduQuran()),
@@ -278,6 +290,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       // Update with your image path
                       buttonText: 'About Quran',
                       onTap: () {
+                        FacebookAnalyticsService().logViewAboutQuran();
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => aboutQuran()),
@@ -302,6 +315,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       // Update with your image path
                       buttonText: 'Facebook',
                       onTap: () async {
+                        // Log Facebook Analytics event
+                        FacebookAnalyticsService().logFacebookLinkClick();
+
                         // https://www.facebook.com/alphabeticalquran
                         const url =
                             'https://www.facebook.com/alphabeticalquran';
@@ -323,6 +339,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       // Update with your image path
                       buttonText: 'Buy the \n HoneyBee Book',
                       onTap: () async {
+                        // Log Facebook Analytics event
+                        FacebookAnalyticsService().logHoneyBeeBookClick();
+
                         // https://www.instagram.com/alphabeticalquran
 
                         const url =
