@@ -1,24 +1,28 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:pdfrx/pdfrx.dart';
 
-class ArabicQuranView extends StatelessWidget {
+class ArabicQuranView extends StatefulWidget {
   final int chapterId;
   final String chapterName;
 
   ArabicQuranView({required this.chapterId, required this.chapterName});
 
-  Future<File> _loadPDFFile() async {
-    // Example of loading a PDF from assets, you can adjust this to load from other sources
-    String assetPath = 'assets/quran.pdf'; // Update this path
-    var data = await rootBundle.load(assetPath);
-    var bytes = data.buffer.asUint8List();
-    var dir = await getApplicationDocumentsDirectory();
-    File file = File('${dir.path}/quran.pdf');
-    return file.writeAsBytes(bytes);
+  @override
+  State<ArabicQuranView> createState() => _ArabicQuranViewState();
+}
+
+class _ArabicQuranViewState extends State<ArabicQuranView> {
+  late PdfViewerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = PdfViewerController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   int getChapterNumber(int chapterId) {
@@ -142,52 +146,27 @@ class ArabicQuranView extends StatelessWidget {
     return finalChapterNumber;
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF003F38),
-        title: Text(chapterName,textAlign: TextAlign.left,),
+        title: Text(widget.chapterName, textAlign: TextAlign.left),
         iconTheme: IconThemeData(
-          color: Colors.white, // Change the back button color
+          color: Colors.white,
         ),
-        titleTextStyle: TextStyle(fontFamily: 'elmessiri',color: Colors.white,fontSize: 23),
+        titleTextStyle: TextStyle(
+            fontFamily: 'elmessiri', color: Colors.white, fontSize: 23),
       ),
-      body: FutureBuilder<File>(
-        future: _loadPDFFile(), // Change this to load your PDF file
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasError) {
-              return Center(child: Text("Error loading PDF"));
-            }
-            return PDFView(
-              filePath: snapshot.data?.path,
-              autoSpacing: true,
-              pageFling: true,
-              pageSnap: true,
-              fitPolicy: FitPolicy.BOTH,
-              defaultPage: getChapterNumber(chapterId) -1,
-              // Set desired page number here
-              onRender: (_pages) {
-                print('PDF rendered with $_pages pages');
-              },
-              onViewCreated: (PDFViewController pdfViewController) {
-                // Perform additional setup if needed
-              },
-              onPageChanged: (int? page, int? total) {
-                print('Page changed: $page of $total');
-              },
-              onError: (error) {
-                print(error.toString());
-              },
-              onPageError: (page, error) {
-                print('$page: ${error.toString()}');
-              },
-            );
-          }
-          return Center(child: CircularProgressIndicator());
-        },
+      body: PdfViewer.asset(
+        'assets/quran.pdf',
+        controller: _controller,
+        params: PdfViewerParams(
+          enableTextSelection: false,
+          onViewerReady: (document, controller) {
+            controller.goToPage(pageNumber: getChapterNumber(widget.chapterId));
+          },
+        ),
       ),
     );
   }

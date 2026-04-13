@@ -5,7 +5,7 @@ Adoption:2
 Adultery:16
 AhleBayt_The_Household_of_Prophet Muhammad:2
 Ahl_e_Kitab:96
-Allah:390
+ALLAH:390
 Angels:32
 Asahab_Al_Kaf_-The_People_Of_The_Cave:18
 Ayub_-Prophet:7

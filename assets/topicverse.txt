@@ -47,7 +47,7 @@ Adam_Eve_Abel_and_Cain
 [20:120]But the Shaitan made an evil suggestion to him; he said: O Adam! Shall I guide you to the tree of immortality and a kingdom which decays not?
 [20:121]Then they both ate of it, so their evil inclinations became manifest to them, and they both began to cover themselves with leaves of the garden, and Adam disobeyed his Lord, so his life became evil (to him).
 [20:122]Then his Lord chose him, so He turned to him and guided (him).
-[20:123]He said: Get forth you two therefrom, all (of you), one of you (is) enemy to another. So there will surely come to you guidance from Me, then whoever follows My guidance, he shall not go astray nor be unhappy;
+[20:123]He said: Get forth you two therefrom, all (of you), one of you (is) enemy to another. So there will surely come to you guidance from Me, then whoever follows My guidance, he shall not go astray nor be unhappy.
 
 
 Adl_and_Accountability
@@ -363,7 +363,7 @@ Ahl_e_Kitab
 [98:7](As for) those who believe and do good, surely they are the -best of men.
 [98:8]Their reward with their Lord is gardens of perpetuity beneath which rivers flow, abiding therein for ever; Allah is well pleased with them and they are well pleased with Him; that is for him who fears his Lord.
 
-Allah
+ALLAH
 [1:1]In the name of Allah, the Beneficent, the Merciful.
 [1:2]All praise is due to Allah, the Lord of the Worlds.
 [1:3]The Beneficent, the Merciful.
@@ -6511,8 +6511,9 @@ Qisas_–_The_Settlement
 
 
 Quraish_–_The_Tribe
-[106:1]For the protection of the Quraysh-[106:2
-
+[106:1] For the protection of the Quraysh--
+[106:2] Their protection during their trading caravans in the winter and the summer--
+[106:3] So let them serve the Lord of this House
 [106:4]Who feeds them against hunger and gives them security against fear.
 
 Quran_–_The_Divine_Book
