@@ -6,9 +6,9 @@ import 'package:flutter/services.dart';
 class AlphaQuranVerse extends StatefulWidget {
   final String chapterId;
   final String chapterName;
-  final String chapterLines;
+  final List<ModelPage> verses;
 
-  const AlphaQuranVerse({super.key, required this.chapterId, required this.chapterName, required this.chapterLines});
+  const AlphaQuranVerse({super.key, required this.chapterId, required this.chapterName, required this.verses});
 
   @override
   State<AlphaQuranVerse> createState() => _AlphaQuranVerseState();
@@ -20,55 +20,12 @@ class _AlphaQuranVerseState extends State<AlphaQuranVerse> {
   Color white = Color(0xFFFFFFFF);
 
 
-  late Map<String, String> chapters;
-  late FileReaderClass fileReaderClass;
   List<ModelPage> modelPageList = [];
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    chapters = {};
-    fileReaderClass = FileReaderClass();
-
-    String topicName = widget.chapterName;
-    int  lines = int.parse(widget.chapterLines);
-    extractVerses(topicName, lines).then((value) {
-      setState(() {
-        modelPageList = value;
-      });
-    });
-
-  }
-
-  Future<List<ModelPage>> extractVerses(String topicName, int lines) async {
-    List<ModelPage> modelPageList = [];
-    List<String> data = await fileReaderClass.readFile('topicverse.txt');
-    for (int i = 0; i < data.length; i++) {
-      String formattedTopicName = topicName;
-      if (data[i].contains(formattedTopicName)) {
-        for (int k = 1; k <= lines; k++) {
-          ModelPage modelPage = ModelPage(verse: "", verseID: "");
-          try {
-            String verseData = data[i + k];
-            if (verseData.isNotEmpty) {
-              List<String> titles = verseData.split(RegExp(r'[\[\]]'));
-              if (titles.length > 1) {
-                modelPage.verse = titles[2];
-                modelPage.verseID = titles[1];
-              }
-            }
-          } catch (e) {
-            print("Error occurred: $e");
-          }
-          modelPageList.add(modelPage);
-        }
-        // Stop iteration after finding verses for the given topic
-        break;
-      }
-    }
-
-    return modelPageList;
+    modelPageList = widget.verses;
   }
 
   @override

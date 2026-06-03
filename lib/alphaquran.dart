@@ -1,11 +1,11 @@
+import 'dart:convert';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:alphabeticalquran/QuranSearchPage.dart';
 import 'package:alphabeticalquran/aboutQuran.dart';
 import 'package:alphabeticalquran/aboutUs.dart';
 import 'package:alphabeticalquran/alphaquranverse.dart';
 import 'package:alphabeticalquran/privacyPolicy.dart';
 import 'package:flutter/material.dart';
-
-import 'Utils/FileReaderClass.dart';
 
 enum Options { privacyPolicy, aboutUs, aboutQuran }
 
@@ -21,37 +21,21 @@ class _AlphaQuranState extends State<AlphaQuran> {
   Color fontGold = Color(0xFFFFDE93);
   Color white = Color(0xFFFFFFFF);
 
-  late Map<String, String> chapters;
-
-  late FileReaderClass fileReaderClass;
+  List<dynamic> topicsList = [];
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    chapters = {};
-    fileReaderClass = FileReaderClass();
     readFileAndProcess();
   }
 
   Future<void> readFileAndProcess() async {
-    List<String> data;
     try {
-      data = await fileReaderClass.readFile('topics.txt');
-
-      for (int i = 0; i < data.length; i++) {
-          try {
-              String num = (i + 1).toString();
-              chapters[num] = data[i];
-
-          } catch (e) {
-            print('Error: $e');
-            chapters[''] = ' ';
-          }
-
-      }
-
-      setState(() {});
+      final String response = await rootBundle.loadString('assets/topics_data.json');
+      final data = await json.decode(response);
+      setState(() {
+        topicsList = data;
+      });
     } catch (e) {
       print('Error reading file: $e');
     }
@@ -148,10 +132,11 @@ class _AlphaQuranState extends State<AlphaQuran> {
               ],
             ),
             Expanded( // Use Expanded to fill the remaining space
-              child: ListView(
-                children: chapters.entries.map((entry) {
-                  return _buildCustomListItem({entry.key: entry.value});
-                }).toList(),
+              child: ListView.builder(
+                itemCount: topicsList.length,
+                itemBuilder: (context, index) {
+                  return _buildCustomListItem(topicsList[index]);
+                },
               ),
             ),
           ],
@@ -194,22 +179,27 @@ class _AlphaQuranState extends State<AlphaQuran> {
     }
   }
 
-  Widget _buildCustomListItem(Map<String, String> chapter) {
-    // Assuming the map has only one entry: {'chapterName': 'description'}
-    String chapterName = chapter.keys.first;
-    String description = chapter.values.first;
+  Widget _buildCustomListItem(dynamic topicData) {
+    String chapterId = topicData['topicId'];
+    String topicName = topicData['topicName'];
+    List<dynamic> rawVerses = topicData['verses'];
+    
+    // Map raw verses to ModelPage list
+    List<ModelPage> versesList = rawVerses.map((v) => ModelPage(
+      verseID: v['id'],
+      verse: v['text']
+    )).toList();
 
-    List<String> titles = description.split(':');
-    String _TopicName = titles[0];
-    String lines = titles[1];
-    String TopicName = _TopicName.replaceAll('_', ' ');
     return InkWell(
       onTap: () {
-        // Navigate to the next page and pass the chapterId
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => AlphaQuranVerse(chapterId: chapterName,chapterName:_TopicName, chapterLines: lines,),
+            builder: (context) => AlphaQuranVerse(
+              chapterId: chapterId,
+              chapterName: topicName,
+              verses: versesList,
+            ),
           ),
         );
       },
@@ -217,16 +207,14 @@ class _AlphaQuranState extends State<AlphaQuran> {
         children: [
           Container(
             color: white,
-            padding: EdgeInsets.all(8), // Added padding for better UI
+            padding: EdgeInsets.all(8),
             child: Row(
               children: [
                 SizedBox(width: 10),
-                Text(chapterName, style: TextStyle(color: Colors.black, fontSize: 16,fontFamily: 'elmessiri')),
-                SizedBox(width: 10),
                 Expanded(
-                  child: Text(TopicName, style: TextStyle(color: Colors.black, fontSize: 16,fontFamily: 'elmessiri')), // Optional: display description
+                  child: Text(topicName, style: TextStyle(color: Colors.black, fontSize: 16, fontFamily: 'elmessiri')),
                 ),
-                Image.asset('images/book.png',width: 30,height: 30,),
+                Image.asset('images/book.png', width: 30, height: 30),
               ],
             ),
           ),

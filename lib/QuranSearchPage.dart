@@ -1,10 +1,11 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'Utils/FileReaderClass.dart';
 import 'VerseDetail.dart';
+import 'alphaquranverse.dart';
 
 class QuranSearchPage extends StatefulWidget {
   @override
@@ -12,15 +13,13 @@ class QuranSearchPage extends StatefulWidget {
 }
 
 class _QuranSearchPageState extends State<QuranSearchPage> {
-  List<String> _allVerses = [];
-  List<String> _filteredVerses = [];
+  List<ModelPage> _allVerses = [];
+  List<ModelPage> _filteredVerses = [];
   TextEditingController _searchController = TextEditingController();
-  late FileReaderClass fileReaderClass;
 
   @override
   void initState() {
     super.initState();
-    fileReaderClass = FileReaderClass();
     _loadQuranData();
     _searchController.addListener(_filterVerses);
   }
@@ -32,14 +31,29 @@ class _QuranSearchPageState extends State<QuranSearchPage> {
   }
 
   Future<void> _loadQuranData() async {
-    // Load the Quran.txt file from the assets
-    List<String> data = await fileReaderClass.readFile('topicverse.txt');
-    List<String> dddd = data;
-    setState(() {
-      // Split the content by new lines or by your custom delimiter
-      _allVerses = (data);
-      //_filteredVerses = _allVerses;
-    });
+    try {
+      final String response = await rootBundle.loadString('assets/topics_data.json');
+      final List<dynamic> data = await json.decode(response);
+      
+      // Flatten the verses into a unique list
+      Map<String, ModelPage> uniqueVerses = {};
+      for (var topic in data) {
+        List<dynamic> rawVerses = topic['verses'];
+        for (var v in rawVerses) {
+           String id = v['id'] ?? '';
+           String text = v['text'] ?? '';
+           if (id.isNotEmpty && text.isNotEmpty && !uniqueVerses.containsKey(id)) {
+             uniqueVerses[id] = ModelPage(verseID: id, verse: text);
+           }
+        }
+      }
+      
+      setState(() {
+        _allVerses = uniqueVerses.values.toList();
+      });
+    } catch (e) {
+      print('Error loading search data: $e');
+    }
   }
 
   void _filterVerses() {
@@ -49,7 +63,7 @@ class _QuranSearchPageState extends State<QuranSearchPage> {
         //_filteredVerses = _allVerses; // If no query, show all verses
       } else {
         _filteredVerses = _allVerses
-            .where((verse) => verse.toLowerCase().contains(query))
+            .where((verse) => verse.verse.toLowerCase().contains(query))
             .toList(); // Filter verses based on query
       }
     });
@@ -104,79 +118,66 @@ class _QuranSearchPageState extends State<QuranSearchPage> {
                 : ListView.builder(
                     itemCount: _filteredVerses.length,
                     itemBuilder: (context, index) {
-                      String verseID = '';
-                      String verse = '';
-                      // Only process lines that start with '['
-                      if (_filteredVerses[index].startsWith('[')) {
-                        // Split the string by ']' to extract verseID and verse
-                        List<String> parts = _filteredVerses[index].split(']');
-                        if (parts.length > 1) {
-                          verseID = parts[0].replaceAll(
-                              '[', ''); // Extract verseID and remove '['
-                          verse = parts[1]; // The verse text after the ']'
-                        }
-                      }
-                      // Only show non-empty verse items
-                      if (verseID.isNotEmpty && verse.isNotEmpty) {
-                        return Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 8.0, horizontal: 16.0),
-                              child: InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          VerseDetail(verseID: verseID),
+                      ModelPage modelPage = _filteredVerses[index];
+                      String verseID = modelPage.verseID;
+                      String verse = modelPage.verse;
+                      
+                      return Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 16.0),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        VerseDetail(verseID: verseID),
+                                  ),
+                                );
+                              },
+                              onLongPress: () {
+                                // Copy both verseID and verse to clipboard
+                                Clipboard.setData(
+                                  ClipboardData(
+                                    text: '$verseID - $verse',
+                                  ),
+                                );
+                              },
+                              child: Row(
+                                children: [
+                                  Text(
+                                    verseID,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontFamily: 'elmessiri',
                                     ),
-                                  );
-                                },
-                                onLongPress: () {
-                                  // Copy both verseID and verse to clipboard
-                                  Clipboard.setData(
-                                    ClipboardData(
-                                      text: '$verseID - $verse',
-                                    ),
-                                  );
-                                },
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      verseID,
+                                  ),
+                                  SizedBox(width: 20),
+                                  Expanded(
+                                    child: Text(
+                                      verse,
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 16,
                                         fontFamily: 'elmessiri',
                                       ),
                                     ),
-                                    SizedBox(width: 20),
-                                    Expanded(
-                                      child: Text(
-                                        verse,
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 16,
-                                          fontFamily: 'elmessiri',
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
-                            SizedBox(
-                              height: 1,
-                              child: Container(
-                                color: Colors.black,
-                              ),
+                          ),
+                          SizedBox(
+                            height: 1,
+                            child: Container(
+                              color: Colors.black,
                             ),
-                          ],
-                        );
-                      } else {
-                        return Container();
-                      }
+                          ),
+                        ],
+                      );
                     },
                   ),
           ),
