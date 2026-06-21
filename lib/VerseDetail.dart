@@ -29,11 +29,10 @@ class _VerseDetailState extends State<VerseDetail> {
   @override
   void initState() {
     super.initState();
-    _fetchData();
     _verseID = widget.verseID;
     String zeroIndex = _verseID.split(":")[0];
     _verse = int.parse(zeroIndex);
-
+    _fetchData();
   }
 
   Future<void> _fetchData() async {

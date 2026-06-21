@@ -16,6 +16,9 @@ class _QuranSearchPageState extends State<QuranSearchPage> {
   List<ModelPage> _allVerses = [];
   List<ModelPage> _filteredVerses = [];
   TextEditingController _searchController = TextEditingController();
+  TextEditingController _surahController = TextEditingController();
+  TextEditingController _ayatController = TextEditingController();
+  bool _showSurahAyatSearch = false;
 
   @override
   void initState() {
@@ -27,7 +30,65 @@ class _QuranSearchPageState extends State<QuranSearchPage> {
   @override
   void dispose() {
     _searchController.dispose();
+    _surahController.dispose();
+    _ayatController.dispose();
     super.dispose();
+  }
+
+  void _searchBySurahAyat() {
+    String surah = _surahController.text.trim();
+    String ayat = _ayatController.text.trim();
+
+    // If both are empty, clear results
+    if (surah.isEmpty && ayat.isEmpty) {
+      setState(() {
+        _filteredVerses = [];
+      });
+      return;
+    }
+
+    // Validate that inputs are numbers if provided
+    int? surahNum = surah.isNotEmpty ? int.tryParse(surah) : null;
+    int? ayatNum = ayat.isNotEmpty ? int.tryParse(ayat) : null;
+
+    if ((surah.isNotEmpty && surahNum == null) || (ayat.isNotEmpty && ayatNum == null)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please enter valid numbers')),
+      );
+      return;
+    }
+
+    // Validate surah range (1-114) if provided
+    if (surahNum != null && (surahNum < 1 || surahNum > 114)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Surah number must be between 1 and 114')),
+      );
+      return;
+    }
+
+    // Validate ayat is positive if provided
+    if (ayatNum != null && ayatNum < 1) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Ayat number must be at least 1')),
+      );
+      return;
+    }
+
+    // Filter verses based on surah and/or ayat
+    setState(() {
+      _filteredVerses = _allVerses.where((verse) {
+        List<String> parts = verse.verseID.split(':');
+        if (parts.length != 2) return false;
+
+        int? verseSurah = int.tryParse(parts[0]);
+        int? verseAyat = int.tryParse(parts[1]);
+
+        bool surahMatch = surahNum == null || verseSurah == surahNum;
+        bool ayatMatch = ayatNum == null || verseAyat == ayatNum;
+
+        return surahMatch && ayatMatch;
+      }).toList();
+    });
   }
 
   Future<void> _loadQuranData() async {
@@ -89,26 +150,101 @@ class _QuranSearchPageState extends State<QuranSearchPage> {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                TextField(
-                  controller: _searchController,
-                  decoration: InputDecoration(
-                    hintText: 'Search verses...',
-                    border: OutlineInputBorder(),
-                    suffixIcon: Icon(Icons.search),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      "${_filteredVerses.length} items found",
+                // Toggle between search modes
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      _showSurahAyatSearch ? 'Search by Surah:Ayat' : 'Search by Text',
                       style: TextStyle(
-                          fontFamily: 'elmessiri',
-                          color: Colors.black,
-                          fontSize: 16),
-                    ))
+                        fontFamily: 'elmessiri',
+                        color: Color(0xFF003F38),
+                        fontSize: 14,
+                      ),
+                    ),
+                    Switch(
+                      value: _showSurahAyatSearch,
+                      activeColor: Color(0xFF003F38),
+                      onChanged: (value) {
+                        setState(() {
+                          _showSurahAyatSearch = value;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10),
+                // Surah and Ayat search fields
+                if (_showSurahAyatSearch) ...[
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: _surahController,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            hintText: 'Surah (1-114)',
+                            border: OutlineInputBorder(),
+                            labelText: 'Surah',
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: TextField(
+                          controller: _ayatController,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            hintText: 'Ayat',
+                            border: OutlineInputBorder(),
+                            labelText: 'Ayat',
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      ElevatedButton(
+                        onPressed: _searchBySurahAyat,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFF003F38),
+                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                        ),
+                        child: Icon(Icons.search, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        "${_filteredVerses.length} items found",
+                        style: TextStyle(
+                            fontFamily: 'elmessiri',
+                            color: Colors.black,
+                            fontSize: 16),
+                      )),
+                ] else ...[
+                  // Text search field
+                  TextField(
+                    controller: _searchController,
+                    decoration: InputDecoration(
+                      hintText: 'Search verses...',
+                      border: OutlineInputBorder(),
+                      suffixIcon: Icon(Icons.search),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        "${_filteredVerses.length} items found",
+                        style: TextStyle(
+                            fontFamily: 'elmessiri',
+                            color: Colors.black,
+                            fontSize: 16),
+                      )),
+                ],
               ],
             ),
           ),
